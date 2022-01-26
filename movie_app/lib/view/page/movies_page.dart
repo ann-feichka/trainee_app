@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/bloc/movies_bloc/movies_bloc.dart';
-import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/page/landscape_page.dart';
 import 'package:movie_app/view/widget/bloc_builder/movie_list_bloc_builder.dart';
@@ -54,10 +53,18 @@ class _MoviesPageState extends State<MoviesPage> {
                                 viewModel.movies?.isEmpty == true) {
                               return CircularProgressIndicator();
                             } else {
-                              return MoviesList(
-                                  movies: movies,
-                                  isBloc: widget.isBloc,
-                                  isLandscape: false);
+                              return RefreshIndicator(
+                                onRefresh: () {
+                                  return Future.delayed(Duration(seconds: 1),
+                                      () {
+                                    viewModel.fetchMovieListRandomly();
+                                  });
+                                },
+                                child: MoviesList(
+                                    movies: viewModel.movies!,
+                                    isBloc: widget.isBloc,
+                                    isLandscape: false),
+                              );
                             }
                           },
                         ),

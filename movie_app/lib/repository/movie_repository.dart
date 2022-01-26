@@ -20,7 +20,6 @@ class MovieRepository {
     List<Movie> resMovies = List.from(movieList);
     List<Movie> newMovies = [];
     for (var _ in movieList) {
-      print(resMovies);
       Movie randomMovie = resMovies.removeAt(_getRandomInt(resMovies.length));
       newMovies.add(randomMovie);
     }

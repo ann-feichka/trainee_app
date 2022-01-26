@@ -24,7 +24,6 @@ class _MoviesListState extends State<MoviesList> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      physics: BouncingScrollPhysics(),
       itemCount: widget.movies.length,
       itemBuilder: (BuildContext context, int index) {
         Movie movie = widget.movies[index];

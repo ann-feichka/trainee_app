@@ -16,10 +16,17 @@ class MovieListBlocBuilder extends StatelessWidget {
     return BlocBuilder<MoviesListBloc, MoviesListState>(
         builder: (context, state) {
       if (state is MoviesSuccessState) {
-        return MoviesList(
-            movies: state.resultList!,
-            isBloc: isBloc,
-            isLandscape: isLandscape);
+        return RefreshIndicator(
+          onRefresh: () {
+            return Future.delayed(Duration(seconds: 1), () {
+              context.read<MoviesListBloc>()..add(MovieListRefresh());
+            });
+          },
+          child: MoviesList(
+              movies: state.resultList!,
+              isBloc: isBloc,
+              isLandscape: isLandscape),
+        );
       }
       if (state is MoviesLoadingState) {
         return CircularProgressIndicator.adaptive();
