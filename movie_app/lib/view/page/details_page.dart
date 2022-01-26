@@ -28,7 +28,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
 
   @override
   void initState() {
-    viewModel.getMovieForDetail(widget.arguments.movieId);
+    viewModel.fetchMovieDetails(widget.arguments.movieId);
     super.initState();
   }
 

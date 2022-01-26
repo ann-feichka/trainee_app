@@ -38,8 +38,8 @@ class _MoviesPageState extends State<MoviesPage> {
                 ),
                 body: widget.isBloc
                     ? BlocProvider(
-                        create: (_) =>
-                            MoviesListBloc()..add(MovieListFetched()),
+                        create: (_) => MoviesListBloc()
+                          ..add(MovieListFetched(isShuffled: false)),
                         child: MovieListBlocBuilder(
                           isBloc: widget.isBloc,
                           isLandscape: false,

@@ -19,7 +19,8 @@ class MovieListBlocBuilder extends StatelessWidget {
         return RefreshIndicator(
           onRefresh: () {
             return Future.delayed(Duration(seconds: 1), () {
-              context.read<MoviesListBloc>()..add(MovieListRefresh());
+              context.read<MoviesListBloc>()
+                ..add(MovieListFetched(isShuffled: true));
             });
           },
           child: MoviesList(

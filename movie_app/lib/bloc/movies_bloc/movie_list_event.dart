@@ -1,5 +1,12 @@
-abstract class MovieListEvent {}
+abstract class MovieListEvent {
+  List<Object?> get props => [];
+}
 
-class MovieListFetched extends MovieListEvent {}
+class MovieListFetched extends MovieListEvent {
+  final bool isShuffled;
 
-class MovieListRefresh extends MovieListEvent {}
+  MovieListFetched({required this.isShuffled});
+
+  @override
+  List<Object?> get props => [isShuffled];
+}

@@ -2,9 +2,7 @@ import 'package:movie_app/model/movie.dart';
 
 abstract class MoviesListState {}
 
-class MovieInitialState extends MoviesListState {
-  List<Movie>? initialList = [];
-}
+class MovieInitialState extends MoviesListState {}
 
 class MoviesLoadingState extends MoviesListState {}
 

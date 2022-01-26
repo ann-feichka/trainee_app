@@ -10,15 +10,13 @@ class MoviesViewModel with ChangeNotifier {
     return _movies;
   }
 
-  fetchMovieList() async {
+  void fetchMovieList() async {
     _movies = _repository.fetchMoviesList();
     notifyListeners();
   }
 
-  fetchMovieListRandomly() {
+  void fetchMovieListRandomly() async {
     _movies = _repository.fetchMovieListWithRandom();
     notifyListeners();
   }
-
-  void getMovieForDetail(int id) {}
 }

@@ -38,11 +38,11 @@ class _MovieLandscapePageState extends State<MovieLandscapePage> {
   @override
   void initState() {
     listViewModel.fetchMovieList();
-    detailViewModel.getMovieForDetail(id);
+    detailViewModel.fetchMovieDetails(id);
     widget.isFromDetail
         ? selectedIndex = listViewModel.movies!
             .indexWhere((element) => element.id == detailViewModel.movie!.id)
-        : null;
+        : () {};
     super.initState();
   }
 
@@ -66,8 +66,8 @@ class _MovieLandscapePageState extends State<MovieLandscapePage> {
                   width: MediaQuery.of(context).size.longestSide / 3,
                   child: widget.isBloc
                       ? BlocProvider(
-                          create: (_) =>
-                              MoviesListBloc()..add(MovieListFetched()),
+                          create: (_) => MoviesListBloc()
+                            ..add(MovieListFetched(isShuffled: false)),
                           child: BlocBuilder<MoviesListBloc, MoviesListState>(
                               builder: (context, state) {
                             if (state is MoviesSuccessState) {
@@ -128,7 +128,7 @@ class _MovieLandscapePageState extends State<MovieLandscapePage> {
                                       child: InkWell(
                                           onTap: () {
                                             detailViewModel
-                                                .getMovieForDetail(movieVM.id);
+                                                .fetchMovieDetails(movieVM.id);
                                             setState(() {
                                               selectedIndex = index;
                                             });

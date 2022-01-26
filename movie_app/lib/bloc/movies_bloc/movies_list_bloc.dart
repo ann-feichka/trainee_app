@@ -9,16 +9,16 @@ class MoviesListBloc extends Bloc<MovieListEvent, MoviesListState> {
 
   MoviesListBloc() : super(MovieInitialState()) {
     on<MovieListFetched>(_fetchMovies);
-    on<MovieListRefresh>(_refreshMovies);
   }
 
   void _fetchMovies(MovieListFetched event, Emitter<MoviesListState> emit) {
-    final List<Movie>? resultList = _repository.fetchMoviesList();
-    return emit(MoviesSuccessState(resultList));
-  }
-
-  void _refreshMovies(MovieListRefresh event, Emitter<MoviesListState> emit) {
-    final List<Movie>? resultList = _repository.fetchMovieListWithRandom();
-    return emit(MoviesSuccessState(resultList));
+    final List<Movie>? resultList = event.isShuffled
+        ? _repository.fetchMovieListWithRandom()
+        : _repository.fetchMoviesList();
+    if (resultList == null) {
+      return emit(MoviesListFailedState());
+    } else {
+      return emit(MoviesSuccessState(resultList));
+    }
   }
 }
