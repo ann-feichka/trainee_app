@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/pages/home_page.dart';
-import 'package:movie_app/pages/movie_landscape_page.dart';
 import 'package:movie_app/route_generator.dart';
-import 'package:movie_app/routes.dart';
 import 'package:movie_app/simple_bloc_observer.dart';
+import 'package:movie_app/view/page/home_page.dart';
 
 void main() {
   BlocOverrides.runZoned(
-        () => runApp(MyApp()),
+    () => runApp(MyApp()),
     blocObserver: SimpleBlocObserver(),
   );
 }
@@ -37,5 +35,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

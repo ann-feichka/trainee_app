@@ -3,11 +3,15 @@ import 'dart:math';
 import 'package:movie_app/model/movie.dart';
 
 class MovieRepository {
-  Movie? getMovie(int id) {
+  Movie getMovie(int id) {
     return movies.firstWhere((element) => element.id == id, orElse: null);
   }
 
   List<Movie> fetchMoviesList() {
+    return movies;
+  }
+
+  List<Movie> fetchMovieListWithRandom() {
     List<Movie> resMovies = List.from(movies);
     return _getMoviesWithRandomOrder(resMovies);
   }

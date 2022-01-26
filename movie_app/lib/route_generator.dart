@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/pages/home_page.dart';
-import 'package:movie_app/pages/movie_details_page.dart';
-import 'package:movie_app/pages/movies_page.dart';
+import 'package:movie_app/view/page/details_page.dart';
+import 'package:movie_app/view/page/home_page.dart';
+import 'package:movie_app/view/page/movies_page.dart';
+
 import 'routes.dart';
 
 class RouteGenerator {
@@ -22,7 +23,7 @@ class RouteGenerator {
       case moviesPage:
         return MaterialPageRoute(
           builder: (_) => MoviesPage(
-            isBloc: arguments as bool ,
+            isBloc: arguments as bool,
           ),
         );
 

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-
-import 'cast_card.dart';
+import 'package:movie_app/string_constants.dart';
+import 'package:movie_app/view/widget/card/cast_card.dart';
 
 class CastAndCrew extends StatelessWidget {
   final List casts;
   final bool isLandscape;
-  const CastAndCrew({Key? key, required this.casts, required this.isLandscape}) : super(key: key);
 
+  const CastAndCrew({Key? key, required this.casts, required this.isLandscape})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class CastAndCrew extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          "Cast & Crew",
+          StringConstants().castAndCrew,
           style: Theme.of(context).textTheme.headline5,
         ),
         SizedBox(
@@ -24,7 +25,8 @@ class CastAndCrew extends StatelessWidget {
             clipBehavior: Clip.none,
             scrollDirection: Axis.horizontal,
             itemCount: casts.length,
-            itemBuilder: (context, index) => CastCard(cast: casts[index],isLandscape:isLandscape),
+            itemBuilder: (context, index) =>
+                CastCard(cast: casts[index], isLandscape: isLandscape),
           ),
         )
       ],

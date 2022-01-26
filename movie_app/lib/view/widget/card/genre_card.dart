@@ -1,10 +1,8 @@
-
-
 import 'package:flutter/material.dart';
 
 class GenreCard extends StatelessWidget {
-
   final String genre;
+
   const GenreCard({Key? key, required this.genre}) : super(key: key);
 
   @override
@@ -20,7 +18,6 @@ class GenreCard extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           color: Colors.deepOrangeAccent,
-          // border: Border.all(color: Colors.black54),
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
@@ -28,6 +25,6 @@ class GenreCard extends StatelessWidget {
           style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
-    );;
+    );
   }
 }

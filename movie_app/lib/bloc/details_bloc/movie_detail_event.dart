@@ -1,17 +1,15 @@
-import 'package:movie_app/model/movie.dart';
-
-abstract class MovieDetailEvent{
+abstract class MovieDetailEvent {
   MovieDetailEvent();
 
-  Object? get props => null;
+  List<Object?> get props => [];
 }
 
-class MovieDetailFetch extends MovieDetailEvent{
-
+class MovieDetailFetch extends MovieDetailEvent {
   final int? id;
 
-  MovieDetailFetch({required this.id});
+  MovieDetailFetch(this.id);
 
   @override
-  Object? get props => id;
+  List<Object?> get props => [id];
 }
+

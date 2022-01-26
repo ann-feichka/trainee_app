@@ -1,13 +1,12 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie.dart';
 
-import 'genre_card.dart';
+import 'card/genre_card.dart';
 
-class Genres extends StatelessWidget {
+class GenresList extends StatelessWidget {
   final Movie movie;
-  const Genres({Key? key, required this.movie}) : super(key: key);
+
+  const GenresList({Key? key, required this.movie}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/string_constants.dart';
 
 class CastCard extends StatelessWidget {
   final Map cast;
@@ -29,7 +30,8 @@ class CastCard extends StatelessWidget {
                   height: 90,
                   placeholder: (context, url) =>
                       CircularProgressIndicator.adaptive(),
-                  errorWidget: (context, url, error) => Text("Error"),
+                  errorWidget: (context, url, error) =>
+                      Text(StringConstants().error),
                 ),
               ),
             ),
