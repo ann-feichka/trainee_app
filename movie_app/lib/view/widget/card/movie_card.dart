@@ -34,7 +34,7 @@ class MovieCard extends StatelessWidget {
                 imageUrl: movie.poster,
                 placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) =>
-                    Text(StringConstants().error),
+                    Center(child: Text(StringConstants().error)),
               ),
             ),
           ),
