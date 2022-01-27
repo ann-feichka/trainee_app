@@ -11,4 +11,5 @@ class StringConstants {
   String plotSummary = "Plot Summary";
   String castAndCrew = "Cast & Crew";
   String error = "Error!";
+  String pageNotFound = "Page not found";
 }

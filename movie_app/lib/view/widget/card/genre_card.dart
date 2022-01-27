@@ -11,10 +11,10 @@ class GenreCard extends StatelessWidget {
       padding: const EdgeInsets.only(top: 10.0),
       child: Container(
         alignment: Alignment.center,
-        margin: EdgeInsets.only(left: 10),
-        padding: EdgeInsets.symmetric(
-          horizontal: 15,
-          vertical: 20 / 5, // 5 padding top and bottom
+        margin: const EdgeInsets.only(left: 10),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 15.0,
+          vertical: 4.0,
         ),
         decoration: BoxDecoration(
           color: Colors.deepOrangeAccent,

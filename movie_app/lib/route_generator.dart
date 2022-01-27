@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/page/details_page.dart';
 import 'package:movie_app/view/page/home_page.dart';
 import 'package:movie_app/view/page/movies_page.dart';
@@ -43,7 +44,7 @@ class RouteGenerator {
     return MaterialPageRoute(builder: (_) {
       return Scaffold(
         appBar: AppBar(
-          title: Text('Page not found'),
+          title: Text(StringConstants().pageNotFound),
         ),
       );
     });
