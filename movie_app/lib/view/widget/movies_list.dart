@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/bloc/details_bloc/details_bloc.dart';
 import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/routes.dart';
-import 'package:movie_app/view/page/details_page.dart';
 import 'package:movie_app/view/widget/card/movie_card.dart';
 
 class MoviesList extends StatefulWidget {
   final List<Movie> movies;
-  final bool isBloc;
   final bool isLandscape;
+  final Function onTap;
 
   const MoviesList(
       {Key? key,
       required this.movies,
-      required this.isBloc,
-      required this.isLandscape})
+      required this.isLandscape,
+      required this.onTap})
       : super(key: key);
 
   @override
@@ -30,9 +31,9 @@ class _MoviesListState extends State<MoviesList> {
         return Container(
             child: InkWell(
                 onTap: () {
-                  Navigator.of(context).pushNamed(detailsPage,
-                      arguments: MovieDetailsArguments(
-                          isBloc: widget.isBloc, movieId: movie.id));
+                  widget.isLandscape
+                      ? _fetchDetails(context, movie.id)
+                      : _navigateToDetailsPage(context, movie.id);
                 },
                 child: MovieCard(
                   movie: movie,
@@ -41,4 +42,12 @@ class _MoviesListState extends State<MoviesList> {
       },
     );
   }
+}
+
+_fetchDetails(BuildContext context, int id) {
+  BlocProvider.of<MovieDetailBloc>(context).add(MovieDetailFetchEvent(id));
+}
+
+_navigateToDetailsPage(BuildContext context, int id) {
+  Navigator.of(context).pushNamed(detailsPageBloc, arguments: id);
 }

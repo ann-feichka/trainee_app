@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/string_constants.dart';
-import 'package:movie_app/view/page/details_page.dart';
+import 'package:movie_app/view/page/bloc_page/details_bloc_page.dart';
+import 'package:movie_app/view/page/bloc_page/movies_bloc_page.dart';
 import 'package:movie_app/view/page/home_page.dart';
-import 'package:movie_app/view/page/movies_page.dart';
+import 'package:movie_app/view/page/view_model_page/details_view_model_page.dart';
+import 'package:movie_app/view/page/view_model_page/movies_view_model_page.dart';
 
 import 'routes.dart';
 
@@ -21,20 +23,25 @@ class RouteGenerator {
           builder: (_) => HomePage(),
         );
 
-      case moviesPage:
+      case moviesPageBloc:
+        return MaterialPageRoute(builder: (_) => MoviesBlocPage());
+
+      case detailsPageBloc:
         return MaterialPageRoute(
-          builder: (_) => MoviesPage(
-            isBloc: arguments as bool,
+          builder: (_) => DetailsBlocPage(
+            id: arguments as int,
           ),
         );
 
-      case detailsPage:
+      case moviesPageViewModel:
+        return MaterialPageRoute(builder: (_) => MoviesViewModelPage());
+
+      case detailsPageViewModel:
         return MaterialPageRoute(
-          builder: (_) => MovieDetailsPage(
-            arguments: arguments as MovieDetailsArguments,
+          builder: (_) => DetailsViewModelPage(
+            id: arguments as int,
           ),
         );
-
       default:
         return RouteGenerator.onUnknownRoute(settings);
     }

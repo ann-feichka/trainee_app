@@ -1,22 +1,25 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
+import 'package:movie_app/instanse.dart';
 import 'package:movie_app/model/movie.dart';
-import 'package:movie_app/repository/movie_repository.dart';
 
 class DetailsViewModel with ChangeNotifier {
-  Movie? _movie;
-  final _repository = MovieRepository();
+  StreamController<Movie?> _movieController =
+      StreamController<Movie?>.broadcast();
+  final _repository = AppModule.movieRepository;
 
-  Movie? get movie {
-    return _movie;
-  }
+  Stream<Movie?> get movie => _movieController.stream;
 
-  void fetchMovieDetails(int? id) async {
+  Future<void> fetchMovieDetails(int? id) async {
+    Movie? movie;
     if (id == null) {
-      _movie = null;
-      notifyListeners();
+      movie = null;
     } else {
-      _movie = _repository.getMovie(id);
-      notifyListeners();
+      movie = await _repository.getMovie(id);
     }
+    _movieController.add(movie);
   }
+
+  Sink get sinkDetail => _movieController;
 }

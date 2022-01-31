@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/bloc/details_bloc/details_bloc.dart';
 import 'package:movie_app/bloc/movies_bloc/movies_bloc.dart';
 import 'package:movie_app/view/widget/movies_list.dart';
 
 class MovieListBlocBuilder extends StatelessWidget {
-  final bool isBloc;
   final bool isLandscape;
+  final Function onTap;
 
   const MovieListBlocBuilder(
-      {Key? key, required this.isBloc, required this.isLandscape})
+      {Key? key, required this.isLandscape, required this.onTap})
       : super(key: key);
 
   @override
@@ -24,9 +25,10 @@ class MovieListBlocBuilder extends StatelessWidget {
             });
           },
           child: MoviesList(
-              movies: state.resultList!,
-              isBloc: isBloc,
-              isLandscape: isLandscape),
+            movies: state.resultList!,
+            isLandscape: isLandscape,
+            onTap: () {},
+          ),
         );
       }
       if (state is MoviesLoadingState) {
@@ -35,4 +37,8 @@ class MovieListBlocBuilder extends StatelessWidget {
       return Center(child: Text("No Movie"));
     });
   }
+}
+
+_fetchDetails(BuildContext context) {
+  context.read<MovieDetailBloc>()..add(MovieDetailFetchEvent(3));
 }

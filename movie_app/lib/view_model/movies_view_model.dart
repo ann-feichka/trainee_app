@@ -1,22 +1,24 @@
+import 'dart:async';
+import 'dart:core';
+
 import 'package:flutter/foundation.dart';
+import 'package:movie_app/instanse.dart';
 import 'package:movie_app/model/movie.dart';
-import 'package:movie_app/repository/movie_repository.dart';
 
 class MoviesViewModel with ChangeNotifier {
-  List<Movie>? _movies;
-  final _repository = MovieRepository();
+  StreamController<List<Movie>?> _moviesController =
+      StreamController<List<Movie>?>.broadcast();
+  final _repository = AppModule.movieRepository;
 
-  List<Movie>? get movies {
-    return _movies;
+  Stream<List<Movie>?> get movies => _moviesController.stream;
+
+  Future<List<Movie>?> fetchMovieList() async {
+    List<Movie>? movies = await _repository.fetchMoviesList();
+    _moviesController.add(movies);
   }
 
-  void fetchMovieList() async {
-    _movies = _repository.fetchMoviesList();
-    notifyListeners();
-  }
-
-  void fetchMovieListRandomly() async {
-    _movies = _repository.fetchMovieListWithRandom();
-    notifyListeners();
+  Future<void> fetchMovieListRandomly() async {
+    List<Movie>? movies = await _repository.fetchMovieListWithRandom();
+    _moviesController.add(movies);
   }
 }

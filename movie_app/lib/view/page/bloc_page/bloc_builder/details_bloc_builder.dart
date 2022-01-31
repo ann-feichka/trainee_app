@@ -14,6 +14,7 @@ class DetailsBlocBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<MovieDetailBloc, MovieDetailsState>(
         builder: (context, state) {
+      context.read<MovieDetailBloc>().add(MovieDetailFetchEvent(null));
       if (state is MovieDetailsSuccessState) {
         return DetailsPageBody(movie: state.movie, isLandScape: isLandscape);
       }

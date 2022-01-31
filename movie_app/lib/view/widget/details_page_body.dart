@@ -26,7 +26,7 @@ class DetailsPageBody extends StatelessWidget {
               child: CachedNetworkImage(
                 height: isLandScape ? size.width / 5 : size.height / 3,
                 width: size.width,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
                 imageUrl: movie.poster,
                 placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) => Text("Error"),

@@ -21,8 +21,7 @@ class HomepageCard extends StatelessWidget {
                 width: size.width / 3,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(moviesPage, arguments: true);
+                      Navigator.of(context).pushNamed(moviesPageBloc);
                     },
                     child: Text(StringConstants().bloc)),
               ),
@@ -30,8 +29,8 @@ class HomepageCard extends StatelessWidget {
                 width: size.width / 3,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pushNamed(moviesPage, arguments: false);
+                      // Navigator.of(context)
+                      //     .pushNamed(moviesPage, arguments: false);
                     },
                     child: Text(StringConstants().mvvm)),
               ),

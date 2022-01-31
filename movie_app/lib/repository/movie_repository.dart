@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:movie_app/model/movie.dart';
 
 class MovieRepository {
-  Movie? getMovie(int id) {
+  Future<Movie?> getMovie(int id) async {
     try {
       return movies.firstWhere((element) => element.id == id);
     } catch (e) {
@@ -11,20 +11,20 @@ class MovieRepository {
     }
   }
 
-  List<Movie>? fetchMoviesList() {
-    return movies;
+  Future<List<Movie>?> fetchMoviesList() async {
+    return Future.value(movies);
   }
 
-  List<Movie>? fetchMovieListWithRandom() {
+  Future<List<Movie>?> fetchMovieListWithRandom() async {
     if (movies == null) {
       return null;
     } else {
       List<Movie>? resMovies = List.from(movies);
-      return _shuffleMovieList(resMovies);
+      return await _shuffleMovieList(resMovies);
     }
   }
 
-  List<Movie> _shuffleMovieList(List<Movie> movieList) {
+  Future<List<Movie>> _shuffleMovieList(List<Movie> movieList) async {
     List<Movie> resMovies = List.from(movieList);
     List<Movie> newMovies = [];
     for (var _ in movieList) {

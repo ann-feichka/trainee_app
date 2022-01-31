@@ -4,11 +4,13 @@ abstract class MovieDetailEvent {
   List<Object?> get props => [];
 }
 
-class MovieDetailFetch extends MovieDetailEvent {
+class MovieDetailFetchEvent extends MovieDetailEvent {
   final int? id;
 
-  MovieDetailFetch(this.id);
+  MovieDetailFetchEvent(this.id);
 
   @override
   List<Object?> get props => [id];
 }
+
+class MovieDetailResetEvent extends MovieDetailEvent {}

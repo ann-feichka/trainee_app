@@ -10,3 +10,11 @@ class MovieListFetched extends MovieListEvent {
   @override
   List<Object?> get props => [isShuffled];
 }
+
+class SelectMovieItem extends MovieListEvent {
+  final int? id;
+
+  SelectMovieItem({required this.id});
+  @override
+  List<Object?> get props => [id];
+}
