@@ -8,7 +8,8 @@ class Movie {
   final String plot, title, poster;
   final List<Map> cast;
 
-  Movie({required this.key,
+  Movie({
+    required this.key,
     required this.poster,
     required this.title,
     required this.id,
