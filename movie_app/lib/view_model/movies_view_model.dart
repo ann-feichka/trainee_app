@@ -21,4 +21,7 @@ class MoviesViewModel with ChangeNotifier {
     List<Movie>? movies = await _repository.fetchMovieListWithRandom();
     _moviesController.add(movies);
   }
+
+  Future<void>? closeStream() =>
+      _moviesController.stream.reduce((previous, element) => null);
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app_instance.dart';
+import 'package:movie_app/inherited_selector.dart';
 import 'package:movie_app/item_interceptor.dart';
 import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/string_constants.dart';
@@ -28,25 +29,35 @@ class _MoviesViewModelPageState extends State<MoviesViewModelPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<List<Movie>?>(
-        stream: listViewModel.movies,
+    return StreamBuilder<Movie?>(
+        stream: detailViewModel.movie,
         builder: (context, snapshot) {
-          return OrientationBuilder(builder: (context, orientation) {
-            return orientation == Orientation.portrait
-                ? Scaffold(
-                    appBar: AppBar(
-                      title: Text(StringConstants.moviesPageTittle),
-                      centerTitle: true,
-                    ),
-                    body: MoviesListWidget(
-                      movies: snapshot.data!,
-                      isLandscape: false,
-                      itemInterceptor: ViewModelMovieItemInterceptor(context),
-                    ))
-                : LandscapeViewModelPageWidget(
-                    isFromDetailsPage: false,
-                  );
-          });
+          return InheritedSelector(
+            id: snapshot.data != null ? snapshot.data!.id : null,
+            child: StreamBuilder<List<Movie>?>(
+                stream: listViewModel.movies,
+                builder: (context, snapshot) {
+                  return OrientationBuilder(builder: (context, orientation) {
+                    return orientation == Orientation.portrait
+                        ? Scaffold(
+                            appBar: AppBar(
+                              title: Text(StringConstants.moviesPageTittle),
+                              centerTitle: true,
+                            ),
+                            body: MoviesListWidget(
+                              selectedIndex: null,
+                              movies: snapshot.data!,
+                              isLandscape: false,
+                              itemInterceptor:
+                                  ViewModelMovieItemInterceptor(context),
+                            ))
+                        : LandscapeViewModelPageWidget(
+                            moviesData: snapshot.data,
+                            isFromDetailsPage: false,
+                          );
+                  });
+                }),
+          );
         });
   }
 }

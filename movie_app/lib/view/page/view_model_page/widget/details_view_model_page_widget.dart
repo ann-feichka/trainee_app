@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app_instance.dart';
 import 'package:movie_app/model/movie.dart';
+import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/details_page_body_widget.dart';
 
 class DetailsViewModelPageWidget extends StatelessWidget {
@@ -17,7 +18,11 @@ class DetailsViewModelPageWidget extends StatelessWidget {
           return DetailsPageBodyWidget(
               movie: snapshot.data!, isLandScape: isLandscape);
         } else {
-          return CircularProgressIndicator();
+          return Scaffold(
+            body: Center(
+              child: Text(StringConstants.noDetails),
+            ),
+          );
         }
       },
     );

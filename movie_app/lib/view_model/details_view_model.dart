@@ -19,4 +19,6 @@ class DetailsViewModel with ChangeNotifier {
   }
 
   Sink get sinkDetail => _movieController;
+
+  Future<void>? closeStream() => _movieController.close();
 }

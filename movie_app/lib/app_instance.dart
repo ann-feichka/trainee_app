@@ -6,3 +6,9 @@ class AppInstance {
   static MoviesViewModel listViewModel = MoviesViewModel();
   static MovieRepository movieRepository = MovieRepository();
 }
+
+class AppInstanceDetails {
+  static DetailsViewModel detailViewModel = DetailsViewModel();
+  static MoviesViewModel listViewModel = MoviesViewModel();
+  static MovieRepository movieRepository = MovieRepository();
+}

@@ -11,9 +11,13 @@ import 'package:movie_app/view_model/view_model.dart';
 
 class LandscapeViewModelPageWidget extends StatefulWidget {
   final bool isFromDetailsPage;
-  final Movie? data;
+  final Movie? detailsData;
+  final List<Movie?>? moviesData;
   const LandscapeViewModelPageWidget(
-      {Key? key, required this.isFromDetailsPage, this.data})
+      {Key? key,
+      required this.isFromDetailsPage,
+      this.detailsData,
+      this.moviesData})
       : super(key: key);
 
   @override
@@ -23,7 +27,6 @@ class LandscapeViewModelPageWidget extends StatefulWidget {
 
 class _LandscapeViewModelPageWidgetState
     extends State<LandscapeViewModelPageWidget> {
-  final DetailsViewModel detailViewModel = AppInstance.detailViewModel;
   final MoviesViewModel listViewModel = AppInstance.listViewModel;
 
   @override
@@ -57,7 +60,7 @@ class _LandscapeViewModelPageWidgetState
                 width: MediaQuery.of(context).size.longestSide / 3 * 2,
                 child: widget.isFromDetailsPage
                     ? DetailsPageBodyWidget(
-                        movie: widget.data!, isLandScape: true)
+                        movie: widget.detailsData!, isLandScape: true)
                     : DetailsViewModelPageWidget(isLandscape: true)),
           ],
         ));

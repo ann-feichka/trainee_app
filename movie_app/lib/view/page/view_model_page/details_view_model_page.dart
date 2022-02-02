@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app_instance.dart';
+import 'package:movie_app/inherited_selector.dart';
 import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/page/view_model_page/widget/landscape_view_model_page_widget.dart';
@@ -35,19 +36,28 @@ class _DetailsViewModelPageState extends State<DetailsViewModelPage> {
     return StreamBuilder<Movie?>(
         stream: detailViewModel.movie,
         builder: (context, snapshot) {
-          return OrientationBuilder(builder: (context, orientation) {
-            return orientation == Orientation.portrait
-                ? Scaffold(
-                    appBar: AppBar(
-                      title: Text(StringConstants.detailsPageTittle),
-                    ),
-                    body: DetailsPageBodyWidget(
-                        movie: snapshot.data!, isLandScape: false))
-                : LandscapeViewModelPageWidget(
-                    isFromDetailsPage: true,
-                    data: snapshot.data,
-                  );
-          });
+          return snapshot.data != null
+              ? InheritedSelector(
+                  id: snapshot.data!.id,
+                  child: OrientationBuilder(builder: (context, orientation) {
+                    return orientation == Orientation.portrait
+                        ? Scaffold(
+                            appBar: AppBar(
+                              title: Text(StringConstants.detailsPageTittle),
+                            ),
+                            body: DetailsPageBodyWidget(
+                                movie: snapshot.data!, isLandScape: false))
+                        : LandscapeViewModelPageWidget(
+                            isFromDetailsPage: true,
+                            detailsData: snapshot.data,
+                          );
+                  }),
+                )
+              : Scaffold(
+                  body: Center(
+                    child: Text(StringConstants.error),
+                  ),
+                );
         });
   }
 }
