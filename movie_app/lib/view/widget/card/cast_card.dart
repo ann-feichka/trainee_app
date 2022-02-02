@@ -31,7 +31,7 @@ class CastCard extends StatelessWidget {
                   placeholder: (context, url) =>
                       CircularProgressIndicator.adaptive(),
                   errorWidget: (context, url, error) =>
-                      Text(StringConstants().error),
+                      Text(StringConstants.error),
                 ),
               ),
             ),

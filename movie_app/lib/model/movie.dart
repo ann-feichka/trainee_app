@@ -1,11 +1,14 @@
+import 'package:flutter/material.dart';
+
 class Movie {
+  final GlobalKey key;
   final int id, year;
   final double rating;
   final List<String> genre;
   final String plot, title, poster;
   final List<Map> cast;
 
-  Movie({
+  Movie({required this.key,
     required this.poster,
     required this.title,
     required this.id,
@@ -20,6 +23,7 @@ class Movie {
 // demo movie data
 List<Movie> movies = [
   Movie(
+    key: GlobalKey(),
     id: 1,
     title: "Bloodshot",
     year: 2020,
@@ -55,6 +59,7 @@ List<Movie> movies = [
     ],
   ),
   Movie(
+    key: GlobalKey(),
     id: 2,
     title: "Ford v Ferrari ",
     year: 2019,
@@ -90,6 +95,7 @@ List<Movie> movies = [
     genre: ["Action", "Drama"],
   ),
   Movie(
+    key: GlobalKey(),
     id: 3,
     title: "Red Notice",
     year: 2021,
@@ -125,6 +131,7 @@ List<Movie> movies = [
     ],
   ),
   Movie(
+    key: GlobalKey(),
     id: 4,
     title: "Spirited Away",
     year: 2001,
@@ -160,6 +167,7 @@ List<Movie> movies = [
     ],
   ),
   Movie(
+    key: GlobalKey(),
     id: 5,
     title: "My Neighbor Totoro",
     year: 1988,
@@ -195,6 +203,7 @@ List<Movie> movies = [
     genre: ["Anime", "Drama"],
   ),
   Movie(
+    key: GlobalKey(),
     id: 6,
     title: "Howl's Moving Castle",
     year: 2004,
@@ -230,6 +239,7 @@ List<Movie> movies = [
     ],
   ),
   Movie(
+    key: GlobalKey(),
     id: 7,
     title: "Castle in the Sky",
     year: 1986,
@@ -265,6 +275,7 @@ List<Movie> movies = [
     ],
   ),
   Movie(
+    key: GlobalKey(),
     id: 8,
     title: "Nausicaa of the Valley of Wind",
     year: 1984,
@@ -300,6 +311,7 @@ List<Movie> movies = [
     genre: ["Anime", "Drama"],
   ),
   Movie(
+    key: GlobalKey(),
     id: 9,
     title: "Mononoke Hime",
     year: 1997,
@@ -335,6 +347,7 @@ List<Movie> movies = [
     ],
   ),
   Movie(
+    key: GlobalKey(),
     id: 10,
     title: "Kiki's Delivery Service",
     year: 1989,
@@ -370,6 +383,7 @@ List<Movie> movies = [
     ],
   ),
   Movie(
+    key: GlobalKey(),
     id: 12,
     title: "Onward",
     year: 2020,

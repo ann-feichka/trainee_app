@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/route_generator.dart';
 import 'package:movie_app/simple_bloc_observer.dart';
-import 'package:movie_app/view/page/view_model_page/movies_view_model_page.dart';
+import 'package:movie_app/view/page/home_page.dart';
 
 void main() {
   BlocOverrides.runZoned(
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
       ),
       onGenerateRoute: RouteGenerator.onGenerateRoute,
       onUnknownRoute: RouteGenerator.onUnknownRoute,
-      home: MoviesViewModelPage(),
+      home: HomePage(),
     );
   }
 }

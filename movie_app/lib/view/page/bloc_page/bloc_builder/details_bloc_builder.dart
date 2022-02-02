@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/bloc/details_bloc/details_bloc.dart';
 import 'package:movie_app/string_constants.dart';
-import 'package:movie_app/view/widget/details_page_body.dart';
+import 'package:movie_app/view/widget/details_page_body_widget.dart';
 
 class DetailsBlocBuilder extends StatelessWidget {
   final bool isLandscape;
@@ -16,9 +16,10 @@ class DetailsBlocBuilder extends StatelessWidget {
         builder: (context, state) {
       context.read<MovieDetailBloc>().add(MovieDetailFetchEvent(null));
       if (state is MovieDetailsSuccessState) {
-        return DetailsPageBody(movie: state.movie, isLandScape: isLandscape);
+        return DetailsPageBodyWidget(
+            movie: state.movie, isLandScape: isLandscape);
       }
-      return Center(child: Text(StringConstants().noDetails));
+      return Center(child: Text(StringConstants.noDetails));
     });
   }
 }

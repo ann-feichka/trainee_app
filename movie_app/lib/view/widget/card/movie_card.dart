@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/string_constants.dart';
-import 'package:movie_app/view/widget/genres_list.dart';
+import 'package:movie_app/view/widget/genres_list_widget.dart';
 
 class MovieCard extends StatelessWidget {
   final Movie movie;
@@ -34,7 +34,7 @@ class MovieCard extends StatelessWidget {
                 imageUrl: movie.poster,
                 placeholder: (context, url) => CircularProgressIndicator(),
                 errorWidget: (context, url, error) =>
-                    Center(child: Text(StringConstants().error)),
+                    Center(child: Text(StringConstants.error)),
               ),
             ),
           ),

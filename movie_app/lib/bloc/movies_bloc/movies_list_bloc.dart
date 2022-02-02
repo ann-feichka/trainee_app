@@ -1,11 +1,11 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/app_instance.dart';
 import 'package:movie_app/bloc/movies_bloc/movie_list_event.dart';
 import 'package:movie_app/bloc/movies_bloc/movies_list_state.dart';
-import 'package:movie_app/instanse.dart';
 import 'package:movie_app/model/movie.dart';
 
 class MoviesListBloc extends Bloc<MovieListEvent, MoviesListState> {
-  final _repository = AppModule.movieRepository;
+  final _repository = AppInstance.movieRepository;
 
   MoviesListBloc() : super(MovieInitialState()) {
     on<MovieListFetched>(_fetchMovies);

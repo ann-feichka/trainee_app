@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/bloc/details_bloc/details_bloc.dart';
 import 'package:movie_app/bloc/movies_bloc/movies_bloc.dart';
-import 'package:movie_app/view/widget/movies_list.dart';
+import 'package:movie_app/item_interceptor.dart';
+import 'package:movie_app/view/widget/movies_list_widget.dart';
 
 class MovieListBlocBuilder extends StatelessWidget {
   final bool isLandscape;
-  final Function onTap;
-
+  final ItemInterceptor itemInterceptor;
   const MovieListBlocBuilder(
-      {Key? key, required this.isLandscape, required this.onTap})
+      {Key? key, required this.isLandscape, required this.itemInterceptor})
       : super(key: key);
 
   @override
@@ -24,10 +23,10 @@ class MovieListBlocBuilder extends StatelessWidget {
                 ..add(MovieListFetched(isShuffled: true));
             });
           },
-          child: MoviesList(
+          child: MoviesListWidget(
             movies: state.resultList!,
             isLandscape: isLandscape,
-            onTap: () {},
+            itemInterceptor: itemInterceptor,
           ),
         );
       }
@@ -37,8 +36,4 @@ class MovieListBlocBuilder extends StatelessWidget {
       return Center(child: Text("No Movie"));
     });
   }
-}
-
-_fetchDetails(BuildContext context) {
-  context.read<MovieDetailBloc>()..add(MovieDetailFetchEvent(3));
 }

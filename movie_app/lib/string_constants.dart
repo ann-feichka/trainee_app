@@ -1,15 +1,16 @@
 class StringConstants {
-  String appName = "Movie App";
-  String bloc = "Bloc";
-  String mvvm = "MVVM";
-  String chooseArch = "What you choose?";
-  String landscapePageTittle = "Movies & Details";
-  String noMovie = "No Movie";
-  String noDetails = "No Details!";
-  String moviesPageTittle = "Movies";
-  String chooseMovie = "Choose movie!";
-  String plotSummary = "Plot Summary";
-  String castAndCrew = "Cast & Crew";
-  String error = "Error!";
-  String pageNotFound = "Page not found";
+  static String appName = "Movie App";
+  static String bloc = "Bloc";
+  static String mvvm = "MVVM";
+  static String chooseArch = "What you choose?";
+  static String landscapePageTittle = "Movies & Details";
+  static String noMovie = "No Movie";
+  static String noDetails = "No Details!";
+  static String moviesPageTittle = "Movies";
+  static String detailsPageTittle = "Details";
+  static String chooseMovie = "Choose movie!";
+  static String plotSummary = "Plot Summary";
+  static String castAndCrew = "Cast & Crew";
+  static String error = "Error!";
+  static String pageNotFound = "Page not found";
 }

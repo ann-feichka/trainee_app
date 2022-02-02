@@ -6,7 +6,7 @@
 // import 'package:movie_app/routes.dart';
 // import 'package:movie_app/string_constants.dart';
 // import 'package:movie_app/view/widget/card/movie_card.dart';
-// import 'package:movie_app/view/widget/details_page_body.dart';
+// import 'package:movie_app/view/widget/details_page_body_widget.dart';
 // import 'package:movie_app/view_model/view_model.dart';
 // import 'package:provider/provider.dart';
 //

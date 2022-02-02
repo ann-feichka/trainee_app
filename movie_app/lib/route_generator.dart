@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/page/bloc_page/details_bloc_page.dart';
 import 'package:movie_app/view/page/bloc_page/movies_bloc_page.dart';
 import 'package:movie_app/view/page/home_page.dart';
 import 'package:movie_app/view/page/view_model_page/details_view_model_page.dart';
 import 'package:movie_app/view/page/view_model_page/movies_view_model_page.dart';
-
-import 'routes.dart';
 
 class RouteGenerator {
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
@@ -18,25 +15,25 @@ class RouteGenerator {
     }
 
     switch (name) {
-      case homePage:
+      case HomePage.homePageRoute:
         return MaterialPageRoute(
           builder: (_) => HomePage(),
         );
 
-      case moviesPageBloc:
+      case MoviesBlocPage.moviesPageBlocRoute:
         return MaterialPageRoute(builder: (_) => MoviesBlocPage());
 
-      case detailsPageBloc:
+      case DetailsBlocPage.detailsPageBlocRoute:
         return MaterialPageRoute(
           builder: (_) => DetailsBlocPage(
             id: arguments as int,
           ),
         );
 
-      case moviesPageViewModel:
+      case MoviesViewModelPage.moviesPageViewModelRoute:
         return MaterialPageRoute(builder: (_) => MoviesViewModelPage());
 
-      case detailsPageViewModel:
+      case DetailsViewModelPage.detailsPageViewModelRoute:
         return MaterialPageRoute(
           builder: (_) => DetailsViewModelPage(
             id: arguments as int,
@@ -48,12 +45,6 @@ class RouteGenerator {
   }
 
   static Route<dynamic>? onUnknownRoute(RouteSettings settings) {
-    return MaterialPageRoute(builder: (_) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text(StringConstants().pageNotFound),
-        ),
-      );
-    });
+    return null;
   }
 }

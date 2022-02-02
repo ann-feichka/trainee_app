@@ -15,7 +15,7 @@ class CastAndCrew extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          StringConstants().castAndCrew,
+          StringConstants.castAndCrew,
           style: Theme.of(context).textTheme.headline5,
         ),
         SizedBox(
