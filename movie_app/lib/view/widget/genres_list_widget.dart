@@ -15,9 +15,9 @@ class GenresList extends StatelessWidget {
       child: ListView.builder(
         physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        itemCount: movie.genre.length,
+        itemCount: movie.genres.length,
         itemBuilder: (context, index) => GenreCard(
-          genre: movie.genre[index],
+          genre: movie.genres[index],
         ),
       ),
     );

@@ -11,13 +11,13 @@ class DetailsBlocPage extends StatelessWidget {
 
   const DetailsBlocPage({Key? key, required this.id}) : super(key: key);
   static const String detailsPageBlocRoute = "/details_bloc";
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
           BlocProvider<MoviesListBloc>(
-              create: (_) =>
-                  MoviesListBloc()..add(MovieListFetched(isShuffled: false))),
+              create: (_) => MoviesListBloc()..add(MovieListFetched())),
           BlocProvider<MovieDetailBloc>(
               create: (_) => MovieDetailBloc()..add(MovieDetailFetchEvent(id)))
         ],

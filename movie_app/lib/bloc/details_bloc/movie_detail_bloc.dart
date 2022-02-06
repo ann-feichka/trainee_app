@@ -14,17 +14,18 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailsState> {
 
   Future<void> _resetDetails(
       MovieDetailResetEvent event, Emitter<MovieDetailsState> emit) async {
-    return emit(MovieDetailsInitialState());
+    emit(MovieDetailsInitialState());
   }
 
   Future<void> _fetchMovieDetails(
       MovieDetailFetchEvent event, Emitter<MovieDetailsState> emit) async {
+    emit(MovieDetailsLoadingState());
     if (event.id != null) {
       Movie? movie = await _repository.getMovie(event.id!);
       if (movie == null) {
-        return emit(MovieDetailsFailedState());
+        emit(MovieDetailsFailedState());
       } else {
-        return emit(MovieDetailsSuccessState(movie));
+        emit(MovieDetailsSuccessState(movie));
       }
     }
   }

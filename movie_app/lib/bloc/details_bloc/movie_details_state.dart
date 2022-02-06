@@ -11,3 +11,5 @@ class MovieDetailsSuccessState extends MovieDetailsState {
 }
 
 class MovieDetailsFailedState extends MovieDetailsState {}
+
+class MovieDetailsLoadingState extends MovieDetailsState {}

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/model/movie.dart';
 
 class GenreCard extends StatelessWidget {
-  final String genre;
+  final Genre genre;
 
   const GenreCard({Key? key, required this.genre}) : super(key: key);
 
@@ -21,7 +22,7 @@ class GenreCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
-          genre,
+          genre.name,
           style: TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),

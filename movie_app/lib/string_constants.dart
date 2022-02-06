@@ -10,7 +10,7 @@ class StringConstants {
   static String detailsPageTittle = "Details";
   static String chooseMovie = "Choose movie!";
   static String plotSummary = "Plot Summary";
-  static String castAndCrew = "Cast & Crew";
+  static String companies = "Companies";
   static String error = "Error!";
   static String pageNotFound = "Page not found";
 }

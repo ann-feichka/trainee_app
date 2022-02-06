@@ -2,30 +2,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/app_instance.dart';
 import 'package:movie_app/bloc/movies_bloc/movie_list_event.dart';
 import 'package:movie_app/bloc/movies_bloc/movies_list_state.dart';
-import 'package:movie_app/model/movie.dart';
+import 'package:movie_app/model/popular_movie_response.dart';
 
-class MoviesListBloc extends Bloc<MovieListEvent, MoviesListState> {
+class MoviesListBloc extends Bloc<MovieListEvent, MoviesState> {
   final _repository = AppInstance.movieRepository;
 
   MoviesListBloc() : super(MovieInitialState()) {
     on<MovieListFetched>(_fetchMovies);
-    on<SelectMovieItem>(_selectMovie);
   }
 
   Future<void> _fetchMovies(
-      MovieListFetched event, Emitter<MoviesListState> emit) async {
-    final List<Movie>? resultList = event.isShuffled
-        ? await _repository.fetchMovieListWithRandom()
-        : await _repository.fetchMoviesList();
+      MovieListFetched event, Emitter<MoviesState> emit) async {
+    emit(MoviesLoadingState());
+    final PopularMovieResponse? resultList =
+        await _repository.fetchMoviesList();
     if (resultList == null) {
-      return emit(MoviesListFailedState());
+      emit(MoviesFailedState());
     } else {
-      return emit(MoviesSuccessState(resultList));
+      emit(MoviesSuccessState(resultList));
     }
-  }
-
-  void _selectMovie(SelectMovieItem event, Emitter<MoviesListState> emit) {
-    int? selectedId = event.id;
-    return emit(MovieSelectedState(selectedId));
   }
 }

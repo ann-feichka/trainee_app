@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/string_constants.dart';
-import 'package:movie_app/view/widget/card/cast_card.dart';
+import 'package:movie_app/view/widget/card/company_card.dart';
 
-class CastAndCrew extends StatelessWidget {
-  final List casts;
+class CompaniesWidget extends StatelessWidget {
+  final List<Company> companies;
   final bool isLandscape;
 
-  const CastAndCrew({Key? key, required this.casts, required this.isLandscape})
+  const CompaniesWidget(
+      {Key? key, required this.companies, required this.isLandscape})
       : super(key: key);
 
   @override
@@ -15,7 +17,7 @@ class CastAndCrew extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          StringConstants.castAndCrew,
+          StringConstants.companies,
           style: Theme.of(context).textTheme.headline5,
         ),
         SizedBox(
@@ -24,9 +26,9 @@ class CastAndCrew extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             clipBehavior: Clip.none,
             scrollDirection: Axis.horizontal,
-            itemCount: casts.length,
-            itemBuilder: (context, index) =>
-                CastCard(cast: casts[index], isLandscape: isLandscape),
+            itemCount: companies.length,
+            itemBuilder: (context, index) => CompanyCard(
+                company: companies[index], isLandscape: isLandscape),
           ),
         )
       ],

@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/string_constants.dart';
-import 'package:movie_app/view/widget/cast_and_crew_widget.dart';
+import 'package:movie_app/view/widget/companies_widget.dart';
 import 'package:movie_app/view/widget/genres_list_widget.dart';
 
 class DetailsPageBodyWidget extends StatelessWidget {
@@ -27,9 +27,11 @@ class DetailsPageBodyWidget extends StatelessWidget {
                 height: isLandScape ? size.width / 5 : size.height / 3,
                 width: size.width,
                 fit: BoxFit.fill,
-                imageUrl: movie!.poster,
+                imageUrl:
+                    'https://image.tmdb.org/t/p/w500/' + movie!.backdropPath!,
                 placeholder: (context, url) => CircularProgressIndicator(),
-                errorWidget: (context, url, error) => Text("Error"),
+                errorWidget: (context, url, error) =>
+                    Center(child: Text("Error")),
               ),
             ),
             Padding(
@@ -49,16 +51,10 @@ class DetailsPageBodyWidget extends StatelessWidget {
                               overflow: TextOverflow.ellipsis,
                             ),
                             Row(
-                              // mainAxisAlignment: MainAxisAlignment,
+                              // mainAxisAlignment: MainAxisAlignment.center,
                               children: <Widget>[
                                 Text(
-                                  '${movie!.year}',
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Text(
-                                  "2h 32min",
+                                  '${movie!.releaseDate}',
                                 ),
                               ],
                             ),
@@ -69,7 +65,7 @@ class DetailsPageBodyWidget extends StatelessWidget {
                         alignment: Alignment.centerRight,
                         child: Column(children: <Widget>[
                           Icon(Icons.star, color: Colors.amberAccent),
-                          Center(child: Text(movie!.rating.toString())),
+                          Center(child: Text(movie!.voteAverage.toString())),
                         ]),
                       )
                     ],
@@ -85,12 +81,14 @@ class DetailsPageBodyWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    movie!.plot,
+                    movie!.overView,
                     style: TextStyle(
                       color: Color(0xFF737599),
                     ),
                   ),
-                  CastAndCrew(casts: movie!.cast, isLandscape: isLandScape)
+                  CompaniesWidget(
+                      companies: movie!.productionCompanies,
+                      isLandscape: isLandScape)
                 ],
               ),
             )

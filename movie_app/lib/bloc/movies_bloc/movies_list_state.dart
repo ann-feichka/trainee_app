@@ -1,24 +1,15 @@
-import 'package:movie_app/model/movie.dart';
+import 'package:movie_app/model/popular_movie_response.dart';
 
-abstract class MoviesListState {
-  List<Object?> get props => [];
-}
+abstract class MoviesState {}
 
-class MovieInitialState extends MoviesListState {}
+class MovieInitialState extends MoviesState {}
 
-class MoviesLoadingState extends MoviesListState {}
+class MoviesLoadingState extends MoviesState {}
 
-class MoviesSuccessState extends MoviesListState {
-  final List<Movie>? resultList;
+class MoviesSuccessState extends MoviesState {
+  final PopularMovieResponse? resultList;
 
   MoviesSuccessState(this.resultList);
 }
 
-class MoviesListFailedState extends MoviesListState {}
-
-class MovieSelectedState extends MoviesListState {
-  final int? id;
-
-  MovieSelectedState(this.id);
-  List<Object?> get props => [id];
-}
+class MoviesFailedState extends MoviesState {}

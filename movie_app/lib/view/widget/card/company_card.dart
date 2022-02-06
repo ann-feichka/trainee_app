@@ -1,12 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:movie_app/api/movie_api.dart';
+import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/string_constants.dart';
 
-class CastCard extends StatelessWidget {
-  final Map cast;
+class CompanyCard extends StatelessWidget {
+  final Company company;
   final bool isLandscape;
 
-  const CastCard({Key? key, required this.cast, required this.isLandscape})
+  const CompanyCard(
+      {Key? key, required this.company, required this.isLandscape})
       : super(key: key);
 
   @override
@@ -23,28 +26,37 @@ class CastCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
-                child: CachedNetworkImage(
-                  imageUrl: cast['image'],
-                  fit: BoxFit.cover,
-                  width: 90,
-                  height: 90,
-                  placeholder: (context, url) =>
-                      CircularProgressIndicator.adaptive(),
-                  errorWidget: (context, url, error) =>
-                      Text(StringConstants.error),
-                ),
+                child: company.logoPath != null
+                    ? CachedNetworkImage(
+                        imageUrl:
+                            MovieApi.baseImageUrl + 'w154/' + company.logoPath!,
+                        fit: BoxFit.fill,
+                        width: 90,
+                        height: 90,
+                        placeholder: (context, url) =>
+                            CircularProgressIndicator.adaptive(),
+                        errorWidget: (context, url, error) =>
+                            Text(StringConstants.error),
+                      )
+                    : Container(
+                        width: 90,
+                        height: 90,
+                        child: Center(
+                          child: Text("No logo"),
+                        ),
+                      ),
               ),
             ),
             Text(
-              cast['orginalName'],
+              company.name,
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyText2,
-              maxLines: 2,
+              maxLines: 1,
             ),
             Padding(
               padding: const EdgeInsets.all(5.0),
               child: Text(
-                cast['movieName'],
+                company.countryAtributes,
                 maxLines: 1,
                 textAlign: TextAlign.center,
                 style: TextStyle(color: Colors.black54),

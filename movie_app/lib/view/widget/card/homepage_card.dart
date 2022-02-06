@@ -19,16 +19,10 @@ class HomepageCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              Container(
-                child: ElevatedButton(
-                    onPressed: onBlocPressed,
-                    child: Text(StringConstants.bloc)),
-              ),
-              Container(
-                child: ElevatedButton(
-                    onPressed: onMVVMPressed,
-                    child: Text(StringConstants.mvvm)),
-              ),
+              ElevatedButton(
+                  onPressed: onBlocPressed, child: Text(StringConstants.bloc)),
+              ElevatedButton(
+                  onPressed: onMVVMPressed, child: Text(StringConstants.mvvm)),
             ],
           ),
         ],
