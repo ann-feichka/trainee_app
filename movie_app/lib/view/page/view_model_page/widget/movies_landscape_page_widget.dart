@@ -59,7 +59,7 @@ class _MoviesLandscapePageWidgetState extends State<MoviesLandscapePageWidget> {
                 detailsWidget: snapshot.data != null
                     ? DetailsPageBodyWidget(
                         isLandScape: true,
-                        movie: snapshot.data,
+                        movie: snapshot.data!,
                       )
                     : NoDetailsWidget()),
           );

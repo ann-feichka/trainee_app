@@ -22,10 +22,10 @@ class _DetailsViewModelPageState extends State<DetailsViewModelPage> {
   @override
   void initState() {
     super.initState();
-    widget.id != null ? _fetchDetails() : null;
+    _fetchDetails();
   }
 
-  _fetchDetails() async {
+  Future<void> _fetchDetails() async {
     await detailViewModel.fetchMovieDetails(widget.id);
   }
 
@@ -46,7 +46,7 @@ class _DetailsViewModelPageState extends State<DetailsViewModelPage> {
                             body: DetailsPageBodyWidget(
                                 movie: snapshot.data!, isLandScape: false))
                         : DetailsLandscapePageWidget(
-                            detailsData: snapshot.data,
+                            detailsData: snapshot.data!,
                           );
                   }),
                 )

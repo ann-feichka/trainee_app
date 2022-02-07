@@ -8,32 +8,36 @@ import 'package:movie_app/view/page/bloc_page/details_bloc_page.dart';
 import 'package:movie_app/view/page/bloc_page/widget/landscape_bloc_page_widget.dart';
 import 'package:movie_app/view/widget/movies_scaffold_widget.dart';
 
-class MoviesBlocPage extends StatelessWidget {
+class MoviesBlocPage extends StatefulWidget {
   const MoviesBlocPage({Key? key}) : super(key: key);
   static const String moviesPageBlocRoute = "/movies_bloc";
 
   @override
+  State<MoviesBlocPage> createState() => _MoviesBlocPageState();
+}
+
+class _MoviesBlocPageState extends State<MoviesBlocPage> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<MoviesListBloc>()..add(MovieListFetched());
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<MoviesListBloc>(
-            create: (_) => MoviesListBloc()..add(MovieListFetched())),
-        BlocProvider<MovieDetailBloc>(create: (_) => MovieDetailBloc())
-      ],
-      child: OrientationBuilder(builder: (context, orientation) {
-        return orientation == Orientation.portrait
-            ? MoviesScaffoldWidget(
-                moviesWidget: MovieListBlocBuilder(
-                  isFromMoviePage: true,
-                  isLandscape: false,
-                  itemInterceptor: BlocMovieItemInterceptor(context),
-                ),
-              )
-            : LandscapeBlocPageWidget(
-                isFromMoviesPage: true,
-              );
-      }),
-    );
+    return OrientationBuilder(builder: (context, orientation) {
+      return orientation == Orientation.portrait
+          ? MoviesScaffoldWidget(
+              moviesWidget: MovieListBlocBuilder(
+                isFromMoviePage: true,
+                isLandscape: false,
+                itemInterceptor: BlocMovieItemInterceptor(context),
+              ),
+            )
+          : LandscapeBlocPageWidget(
+              isFromMoviesPage: true,
+            );
+    });
   }
 }
 

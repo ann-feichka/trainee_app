@@ -23,7 +23,7 @@ class _MoviesViewModelPageWidgetState extends State<MoviesViewModelPageWidget> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
-      stream: AppInstance.listViewModel.movies,
+      stream: AppInstance.listViewModel.popularMovieResponse,
       builder: (BuildContext context,
           AsyncSnapshot<PopularMovieResponse?> snapshot) {
         if (snapshot.data?.movies == null ||

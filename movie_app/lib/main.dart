@@ -4,6 +4,9 @@ import 'package:movie_app/route_generator.dart';
 import 'package:movie_app/simple_bloc_observer.dart';
 import 'package:movie_app/view/page/home_page.dart';
 
+import 'bloc/details_bloc/details_bloc.dart';
+import 'bloc/movies_bloc/movies_bloc.dart';
+
 void main() {
   BlocOverrides.runZoned(
     () => runApp(MyApp()),
@@ -14,14 +17,19 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Movies App',
-      theme: ThemeData(
-        primarySwatch: Colors.teal,
-      ),
-      onGenerateRoute: RouteGenerator.onGenerateRoute,
-      onUnknownRoute: RouteGenerator.onUnknownRoute,
-      home: HomePage(),
-    );
+    return MultiBlocProvider(
+        providers: [
+          BlocProvider<MoviesListBloc>(create: (_) => MoviesListBloc()),
+          BlocProvider<MovieDetailBloc>(create: (_) => MovieDetailBloc())
+        ],
+        child: MaterialApp(
+          title: 'Movies App',
+          theme: ThemeData(
+            primarySwatch: Colors.teal,
+          ),
+          onGenerateRoute: RouteGenerator.onGenerateRoute,
+          onUnknownRoute: RouteGenerator.onUnknownRoute,
+          home: HomePage(),
+        ));
   }
 }

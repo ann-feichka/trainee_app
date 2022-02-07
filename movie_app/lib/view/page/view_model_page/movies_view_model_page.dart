@@ -33,7 +33,7 @@ class _MoviesViewModelPageState extends State<MoviesViewModelPage> {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<PopularMovieResponse?>(
-        stream: listViewModel.movies,
+        stream: listViewModel.popularMovieResponse,
         builder: (context, snapshot) {
           return OrientationBuilder(builder: (context, orientation) {
             return orientation == Orientation.portrait

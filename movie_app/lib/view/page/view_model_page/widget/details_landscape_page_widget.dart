@@ -8,7 +8,7 @@ import 'package:movie_app/view/widget/landscape_scaffold_widget.dart';
 import 'package:movie_app/view_model/view_model.dart';
 
 class DetailsLandscapePageWidget extends StatefulWidget {
-  final Movie? detailsData;
+  final Movie detailsData;
   const DetailsLandscapePageWidget({Key? key, required this.detailsData})
       : super(key: key);
 

@@ -8,10 +8,11 @@ class MoviesViewModel {
       StreamController<PopularMovieResponse?>.broadcast();
   final _repository = AppInstance.movieRepository;
 
-  Stream<PopularMovieResponse?> get movies => _moviesController.stream;
+  Stream<PopularMovieResponse?> get popularMovieResponse =>
+      _moviesController.stream;
 
-  Future<PopularMovieResponse?> fetchMovieList() async {
-    PopularMovieResponse? movies = await _repository.fetchMoviesList();
+  Future<void> fetchMovieList() async {
+    PopularMovieResponse movies = await _repository.fetchMoviesList();
     _moviesController.add(movies);
   }
 

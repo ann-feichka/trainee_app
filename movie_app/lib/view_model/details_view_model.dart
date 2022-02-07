@@ -13,7 +13,7 @@ class DetailsViewModel with ChangeNotifier {
 
   Future<void> fetchMovieDetails(int? id) async {
     if (id != null) {
-      Movie? movie = await _repository.getMovie(id);
+      Movie movie = await _repository.getMovie(id);
       _movieController.add(movie);
     }
   }
