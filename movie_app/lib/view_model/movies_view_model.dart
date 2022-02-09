@@ -15,7 +15,4 @@ class MoviesViewModel {
     PopularMovieResponse movies = await _repository.fetchMoviesList();
     _moviesController.add(movies);
   }
-
-  Future<void>? closeStream() =>
-      _moviesController.stream.reduce((previous, element) => null);
 }

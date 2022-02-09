@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie.dart';
+import 'package:movie_app/model/movie_response.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/card/company_card.dart';
 
 class CompaniesWidget extends StatelessWidget {
   final List<Company> companies;
-  final bool isLandscape;
-
-  const CompaniesWidget(
-      {Key? key, required this.companies, required this.isLandscape})
-      : super(key: key);
+  const CompaniesWidget({Key? key, required this.companies}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,8 +23,8 @@ class CompaniesWidget extends StatelessWidget {
             clipBehavior: Clip.none,
             scrollDirection: Axis.horizontal,
             itemCount: companies.length,
-            itemBuilder: (context, index) => CompanyCard(
-                company: companies[index], isLandscape: isLandscape),
+            itemBuilder: (context, index) =>
+                CompanyCard(company: companies[index]),
           ),
         )
       ],

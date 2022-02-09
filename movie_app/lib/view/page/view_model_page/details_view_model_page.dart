@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/app_instance.dart';
-import 'package:movie_app/inherited_selector.dart';
-import 'package:movie_app/model/movie.dart';
 import 'package:movie_app/string_constants.dart';
-import 'package:movie_app/view/page/view_model_page/widget/details_landscape_page_widget.dart';
-import 'package:movie_app/view/widget/details_page_body_widget.dart';
+import 'package:movie_app/view/page/view_model_page/widget/details_v_m_widget.dart';
 import 'package:movie_app/view_model/details_view_model.dart';
 
 class DetailsViewModelPage extends StatefulWidget {
@@ -22,39 +19,26 @@ class _DetailsViewModelPageState extends State<DetailsViewModelPage> {
   @override
   void initState() {
     super.initState();
-    _fetchDetails();
+    // _fetchDetails();
   }
 
-  Future<void> _fetchDetails() async {
-    await detailViewModel.fetchMovieDetails(widget.id);
-  }
+  // Future<void> _fetchDetails() async {
+  //   await detailViewModel.fetchMovieDetails(widget.id);
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<Movie?>(
-        stream: detailViewModel.movie,
-        builder: (context, snapshot) {
-          return snapshot.data != null
-              ? InheritedSelector(
-                  id: snapshot.data?.id,
-                  child: OrientationBuilder(builder: (context, orientation) {
-                    return orientation == Orientation.portrait
-                        ? Scaffold(
-                            appBar: AppBar(
-                              title: Text(StringConstants.detailsPageTittle),
-                            ),
-                            body: DetailsPageBodyWidget(
-                                movie: snapshot.data!, isLandScape: false))
-                        : DetailsLandscapePageWidget(
-                            detailsData: snapshot.data!,
-                          );
-                  }),
-                )
-              : Scaffold(
-                  body: Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                );
-        });
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(StringConstants.detailsPageTittle),
+        ),
+        body: OrientationBuilder(builder: (context, orientation) {
+          orientation == Orientation.landscape
+              ? Navigator.of(context).pop()
+              : null;
+          return DetailsVMWidget(
+            id: widget.id,
+          );
+        }));
   }
 }

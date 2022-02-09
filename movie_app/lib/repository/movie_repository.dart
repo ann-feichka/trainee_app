@@ -1,13 +1,13 @@
 import 'package:movie_app/api/movie_api.dart';
 import 'package:movie_app/app_instance.dart';
-import 'package:movie_app/model/movie.dart';
+import 'package:movie_app/model/movie_response.dart';
 import 'package:movie_app/model/popular_movie_response.dart';
 
 class MovieRepository {
   MovieApi movieApi = AppInstance.movieApi;
 
-  Future<Movie> getMovie(int id) async {
-    Movie movie = await movieApi.fetchMovieDetails(id: id).catchError(
+  Future<MovieResponse> getMovie(int id) async {
+    MovieResponse movie = await movieApi.fetchMovieDetails(id: id).catchError(
       (Object e) {
         print(e.toString());
       },

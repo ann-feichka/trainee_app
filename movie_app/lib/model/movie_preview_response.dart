@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'movie_preview.g.dart';
+part 'movie_preview_response.g.dart';
 
 @JsonSerializable()
-class MoviePreview {
+class MoviePreviewResponse {
   final int? id;
   @JsonKey(name: 'backdrop_path')
   final String? backdropPath;
@@ -15,7 +15,7 @@ class MoviePreview {
   @JsonKey(name: 'vote_average')
   final double voteAverage;
 
-  MoviePreview(
+  MoviePreviewResponse(
       {required this.id,
       this.backdropPath,
       required this.overView,
@@ -24,7 +24,7 @@ class MoviePreview {
       required this.title,
       required this.voteAverage});
 
-  factory MoviePreview.fromJson(Map<String, dynamic> json) =>
-      _$MoviePreviewFromJson(json);
-  Map<String, dynamic> toJson() => _$MoviePreviewToJson(this);
+  factory MoviePreviewResponse.fromJson(Map<String, dynamic> json) =>
+      _$MoviePreviewResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$MoviePreviewResponseToJson(this);
 }

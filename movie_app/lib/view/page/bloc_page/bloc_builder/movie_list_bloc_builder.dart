@@ -2,19 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/bloc/movies_bloc/movies_bloc.dart';
 import 'package:movie_app/inherited_selector.dart';
-import 'package:movie_app/item_interceptor.dart';
 import 'package:movie_app/string_constants.dart';
-import 'package:movie_app/view/widget/movies_list_widget.dart';
+import 'package:movie_app/view/widget/movie_list_bloc.dart';
 
 class MovieListBlocBuilder extends StatelessWidget {
-  final bool isLandscape;
-  final bool isFromMoviePage;
-  final ItemInterceptor itemInterceptor;
+  final IdCallback idCallback;
+  final bool isHighlited;
   const MovieListBlocBuilder(
-      {Key? key,
-      required this.isLandscape,
-      required this.itemInterceptor,
-      required this.isFromMoviePage})
+      {Key? key, required this.idCallback, required this.isHighlited})
       : super(key: key);
 
   @override
@@ -30,15 +25,11 @@ class MovieListBlocBuilder extends StatelessWidget {
               context.read<MoviesListBloc>()..add(MovieListFetched());
             });
           },
-          child: MoviesListWidget(
-            controller: isFromMoviePage
-                ? null
-                : ScrollController(
-                    initialScrollOffset: 100 * _selectedIndex!.toDouble()),
-            selectedIndex: _selectedIndex,
+          child: MoviesListBlocWidget(
+            isHighlited: isHighlited,
             movies: state.resultList!,
-            isLandscape: isLandscape,
-            itemInterceptor: itemInterceptor,
+            idCallback: idCallback,
+            selectedIndex: _selectedIndex,
           ),
         );
       }
@@ -50,7 +41,7 @@ class MovieListBlocBuilder extends StatelessWidget {
           child: Text(StringConstants.error),
         );
       }
-      return Center(child: Text("No Movie"));
+      return Center(child: Text(StringConstants.noMovie));
     });
   }
 }

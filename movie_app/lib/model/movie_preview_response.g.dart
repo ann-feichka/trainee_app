@@ -1,12 +1,14 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'movie_preview.dart';
+part of 'movie_preview_response.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MoviePreview _$MoviePreviewFromJson(Map<String, dynamic> json) => MoviePreview(
+MoviePreviewResponse _$MoviePreviewResponseFromJson(
+        Map<String, dynamic> json) =>
+    MoviePreviewResponse(
       id: json['id'] as int?,
       backdropPath: json['backdrop_path'] as String?,
       overView: json['overView'] as String?,
@@ -16,7 +18,8 @@ MoviePreview _$MoviePreviewFromJson(Map<String, dynamic> json) => MoviePreview(
       voteAverage: (json['vote_average'] as num).toDouble(),
     );
 
-Map<String, dynamic> _$MoviePreviewToJson(MoviePreview instance) =>
+Map<String, dynamic> _$MoviePreviewResponseToJson(
+        MoviePreviewResponse instance) =>
     <String, dynamic>{
       'id': instance.id,
       'backdrop_path': instance.backdropPath,

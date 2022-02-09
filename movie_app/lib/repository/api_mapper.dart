@@ -1,0 +1,3 @@
+class ApiMapper {
+  map() {}
+}

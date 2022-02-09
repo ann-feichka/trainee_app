@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie.dart';
+import 'package:movie_app/model/movie_response.dart';
 
 class GenreCard extends StatelessWidget {
   final Genre genre;

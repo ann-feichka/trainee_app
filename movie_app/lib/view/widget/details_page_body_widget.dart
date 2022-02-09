@@ -1,22 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/movie_api.dart';
-import 'package:movie_app/model/movie.dart';
+import 'package:movie_app/model/movie_response.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/companies_widget.dart';
 import 'package:movie_app/view/widget/genres_list_widget.dart';
 
 class DetailsPageBodyWidget extends StatelessWidget {
-  final Movie movie;
-  final bool isLandScape;
+  final MovieResponse movie;
 
-  const DetailsPageBodyWidget(
-      {Key? key, required this.movie, required this.isLandScape})
+  const DetailsPageBodyWidget({Key? key, required this.movie})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
@@ -25,13 +22,13 @@ class DetailsPageBodyWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
               child: CachedNetworkImage(
-                height: isLandScape ? size.width / 5 : size.height / 3,
-                width: size.width,
-                fit: BoxFit.fill,
+                height: 250,
+                fit: BoxFit.cover,
                 imageUrl: MovieApi.baseImageUrl + 'w500/' + movie.backdropPath!,
-                placeholder: (context, url) => CircularProgressIndicator(),
+                placeholder: (context, url) =>
+                    Center(child: CircularProgressIndicator()),
                 errorWidget: (context, url, error) =>
-                    Center(child: Text("Error")),
+                    Center(child: Text(StringConstants.error)),
               ),
             ),
             Padding(
@@ -86,9 +83,7 @@ class DetailsPageBodyWidget extends StatelessWidget {
                       color: Color(0xFF737599),
                     ),
                   ),
-                  CompaniesWidget(
-                      companies: movie.productionCompanies,
-                      isLandscape: isLandScape)
+                  CompaniesWidget(companies: movie.productionCompanies)
                 ],
               ),
             )

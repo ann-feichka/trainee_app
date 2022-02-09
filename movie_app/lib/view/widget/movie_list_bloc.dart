@@ -2,25 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/model/movie_preview_response.dart';
 import 'package:movie_app/model/popular_movie_response.dart';
 import 'package:movie_app/view/widget/card/movie_card.dart';
-import 'package:movie_app/view/widget/movie_list_bloc.dart';
 
-class MoviesListWidget extends StatefulWidget {
+typedef void IdCallback(int id);
+
+class MoviesListBlocWidget extends StatefulWidget {
   final PopularMovieResponse movies;
   final IdCallback idCallback;
   final int? selectedIndex;
+  final bool isHighlited;
 
-  const MoviesListWidget(
+  const MoviesListBlocWidget(
       {Key? key,
       required this.movies,
       this.selectedIndex,
-      required this.idCallback})
+      required this.idCallback,
+      required this.isHighlited})
       : super(key: key);
 
   @override
-  State<MoviesListWidget> createState() => _MoviesListWidgetState();
+  State<MoviesListBlocWidget> createState() => _MoviesListBlocWidgetState();
 }
 
-class _MoviesListWidgetState extends State<MoviesListWidget> {
+class _MoviesListBlocWidgetState extends State<MoviesListBlocWidget> {
   final ScrollController controller = ScrollController();
 
   @override
@@ -32,7 +35,9 @@ class _MoviesListWidgetState extends State<MoviesListWidget> {
       itemBuilder: (BuildContext context, int index) {
         MoviePreviewResponse movie = widget.movies.movies[index];
         return Container(
-            color: widget.selectedIndex != null && widget.selectedIndex == index
+            color: widget.isHighlited == true &&
+                    widget.selectedIndex != null &&
+                    widget.selectedIndex == index
                 ? Colors.deepOrangeAccent
                 : null,
             child: InkWell(
