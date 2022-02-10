@@ -18,6 +18,7 @@ class MoviesBlocPage extends StatefulWidget {
 class _MoviesBlocPageState extends State<MoviesBlocPage> {
   int? _selectId;
   bool isUpdate = false;
+
   @override
   void initState() {
     super.initState();

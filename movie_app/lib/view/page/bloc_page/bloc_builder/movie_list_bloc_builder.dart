@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/bloc/movies_bloc/movies_bloc.dart';
 import 'package:movie_app/inherited_selector.dart';
 import 'package:movie_app/string_constants.dart';
-import 'package:movie_app/view/widget/movie_list_bloc.dart';
+import 'package:movie_app/view/widget/movie_list_widget.dart';
 
 class MovieListBlocBuilder extends StatelessWidget {
   final IdCallback idCallback;
@@ -25,7 +25,7 @@ class MovieListBlocBuilder extends StatelessWidget {
               context.read<MoviesListBloc>()..add(MovieListFetched());
             });
           },
-          child: MoviesListBlocWidget(
+          child: MoviesListWidget(
             isHighlited: isHighlited,
             movies: state.resultList!,
             idCallback: idCallback,

@@ -43,7 +43,7 @@ class DetailsPageBodyWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              movie.title,
+                              movie.title!,
                               style: Theme.of(context).textTheme.headline5,
                               overflow: TextOverflow.ellipsis,
                             ),
@@ -78,12 +78,12 @@ class DetailsPageBodyWidget extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    movie.overView,
+                    movie.overView!,
                     style: TextStyle(
                       color: Color(0xFF737599),
                     ),
                   ),
-                  CompaniesWidget(companies: movie.productionCompanies)
+                  CompaniesWidget(companies: movie.productionCompanies!)
                 ],
               ),
             )

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie_preview_response.dart';
+import 'package:movie_app/model/movie_response.dart';
 import 'package:movie_app/model/popular_movie_response.dart';
 import 'package:movie_app/view/widget/card/movie_card.dart';
 
 typedef void IdCallback(int id);
 
-class MoviesListBlocWidget extends StatefulWidget {
+class MoviesListWidget extends StatefulWidget {
   final PopularMovieResponse movies;
   final IdCallback idCallback;
   final int? selectedIndex;
   final bool isHighlited;
 
-  const MoviesListBlocWidget(
+  const MoviesListWidget(
       {Key? key,
       required this.movies,
       this.selectedIndex,
@@ -20,10 +20,10 @@ class MoviesListBlocWidget extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<MoviesListBlocWidget> createState() => _MoviesListBlocWidgetState();
+  State<MoviesListWidget> createState() => _MoviesListWidgetState();
 }
 
-class _MoviesListBlocWidgetState extends State<MoviesListBlocWidget> {
+class _MoviesListWidgetState extends State<MoviesListWidget> {
   final ScrollController controller = ScrollController();
 
   @override
@@ -33,18 +33,17 @@ class _MoviesListBlocWidgetState extends State<MoviesListBlocWidget> {
       controller: controller,
       itemCount: widget.movies.movies.length,
       itemBuilder: (BuildContext context, int index) {
-        MoviePreviewResponse movie = widget.movies.movies[index];
+        MovieResponse movie = widget.movies.movies[index];
         return Container(
             color: widget.isHighlited == true &&
                     widget.selectedIndex != null &&
                     widget.selectedIndex == index
                 ? Colors.deepOrangeAccent
                 : null,
-            child: InkWell(
-                onTap: () => widget.idCallback(movie.id!),
-                child: MovieCard(
-                  movie: movie,
-                )));
+            child: MovieCard(
+              movie: movie,
+              idCallback: widget.idCallback,
+            ));
       },
     );
   }

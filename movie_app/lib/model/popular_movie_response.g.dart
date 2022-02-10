@@ -11,7 +11,7 @@ PopularMovieResponse _$PopularMovieResponseFromJson(
     PopularMovieResponse(
       page: json['page'] as int,
       movies: (json['results'] as List<dynamic>)
-          .map((e) => MoviePreviewResponse.fromJson(e as Map<String, dynamic>))
+          .map((e) => MovieResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

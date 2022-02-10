@@ -6,33 +6,35 @@ part of 'movie_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-MovieResponse _$MovieFromJson(Map<String, dynamic> json) => MovieResponse(
+MovieResponse _$MovieResponseFromJson(Map<String, dynamic> json) =>
+    MovieResponse(
       id: json['id'] as int,
-      isAdult: json['adult'] as bool,
+      isAdult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
       genreIds:
           (json['genre_ids'] as List<dynamic>?)?.map((e) => e as int).toList(),
-      originalLanguage: json['original_language'] as String,
-      originalTitle: json['original_title'] as String,
-      overView: json['overview'] as String,
-      popularity: (json['popularity'] as num).toDouble(),
-      posterPath: json['poster_path'] as String,
-      title: json['title'] as String,
-      isVideo: json['video'] as bool,
-      voteAverage: (json['vote_average'] as num).toDouble(),
-      voteCount: json['vote_count'] as int,
-      budget: json['budget'] as int,
-      genres: (json['genres'] as List<dynamic>)
-          .map((e) => Genre.fromJson(e as Map<String, dynamic>))
+      originalLanguage: json['original_language'] as String?,
+      originalTitle: json['original_title'] as String?,
+      overView: json['overview'] as String?,
+      popularity: (json['popularity'] as num?)?.toDouble(),
+      posterPath: json['poster_path'] as String?,
+      releaseDate: json['release_date'] as String?,
+      title: json['title'] as String?,
+      isVideo: json['video'] as bool?,
+      voteAverage: (json['vote_average'] as num?)?.toDouble(),
+      voteCount: json['vote_count'] as int?,
+      budget: json['budget'] as int?,
+      genres: (json['genres'] as List<dynamic>?)
+          ?.map((e) => Genre.fromJson(e as Map<String, dynamic>))
           .toList(),
-      productionCompanies: (json['production_companies'] as List<dynamic>)
-          .map((e) => Company.fromJson(e as Map<String, dynamic>))
+      productionCompanies: (json['production_companies'] as List<dynamic>?)
+          ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
           .toList(),
-      runtime: json['runtime'] as int,
-      releaseDate: json['release_date'] as String,
+      runtime: json['runtime'] as int?,
     );
 
-Map<String, dynamic> _$MovieToJson(MovieResponse instance) => <String, dynamic>{
+Map<String, dynamic> _$MovieResponseToJson(MovieResponse instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'adult': instance.isAdult,
       'backdrop_path': instance.backdropPath,

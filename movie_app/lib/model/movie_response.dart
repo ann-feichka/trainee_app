@@ -6,58 +6,59 @@ part 'movie_response.g.dart';
 class MovieResponse {
   final int id;
   @JsonKey(name: 'adult')
-  final bool isAdult;
+  final bool? isAdult;
   @JsonKey(name: 'backdrop_path')
   final String? backdropPath;
   @JsonKey(name: 'genre_ids')
   final List<int>? genreIds;
   @JsonKey(name: 'original_language')
-  final String originalLanguage;
+  final String? originalLanguage;
   @JsonKey(name: 'original_title')
-  final String originalTitle;
+  final String? originalTitle;
   @JsonKey(name: 'overview')
-  final String overView;
-  final double popularity;
+  final String? overView;
+  final double? popularity;
   @JsonKey(name: 'poster_path')
-  final String posterPath;
+  final String? posterPath;
   @JsonKey(name: 'release_date')
-  final String releaseDate;
-  final String title;
+  final String? releaseDate;
+  final String? title;
   @JsonKey(name: 'video')
-  final bool isVideo;
+  final bool? isVideo;
   @JsonKey(name: 'vote_average')
-  final double voteAverage;
+  final double? voteAverage;
   @JsonKey(name: 'vote_count')
-  final int voteCount;
-  final int budget;
-  final List<Genre> genres;
+  final int? voteCount;
+  final int? budget;
+  final List<Genre>? genres;
   @JsonKey(name: 'production_companies')
-  final List<Company> productionCompanies;
-  final int runtime;
+  final List<Company>? productionCompanies;
+  final int? runtime;
 
-  MovieResponse(
-      {required this.id,
-      required this.isAdult,
-      this.backdropPath,
-      required this.genreIds,
-      required this.originalLanguage,
-      required this.originalTitle,
-      required this.overView,
-      required this.popularity,
-      required this.posterPath,
-      required this.title,
-      required this.isVideo,
-      required this.voteAverage,
-      required this.voteCount,
-      required this.budget,
-      required this.genres,
-      required this.productionCompanies,
-      required this.runtime,
-      required this.releaseDate});
+  MovieResponse({
+    required this.id,
+    this.isAdult,
+    this.backdropPath,
+    this.genreIds,
+    this.originalLanguage,
+    this.originalTitle,
+    this.overView,
+    this.popularity,
+    this.posterPath,
+    this.releaseDate,
+    this.title,
+    this.isVideo,
+    this.voteAverage,
+    this.voteCount,
+    this.budget,
+    this.genres,
+    this.productionCompanies,
+    this.runtime,
+  });
 
   factory MovieResponse.fromJson(Map<String, dynamic> json) =>
-      _$MovieFromJson(json);
-  Map<String, dynamic> toJson() => _$MovieToJson(this);
+      _$MovieResponseFromJson(json);
+  Map<String, dynamic> toJson() => _$MovieResponseToJson(this);
 }
 
 @JsonSerializable()
