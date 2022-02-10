@@ -38,7 +38,7 @@ class _MoviesListViewModelWidgetState extends State<MoviesListViewModelWidget> {
         builder: (context, snapshot) {
           int? _id = InheritedSelector.of(context);
           int? _selectedIndex =
-              snapshot.data?.movies.indexWhere((element) => element.id == _id);
+              snapshot.data?.movies?.indexWhere((element) => element.id == _id);
           return snapshot.data != null
               ? RefreshIndicator(
                   onRefresh: () {

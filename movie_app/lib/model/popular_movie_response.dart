@@ -5,11 +5,14 @@ part 'popular_movie_response.g.dart';
 
 @JsonSerializable()
 class PopularMovieResponse {
-  final int page;
+  int? page;
   @JsonKey(name: 'results')
-  final List<MovieResponse> movies;
-
-  PopularMovieResponse({required this.page, required this.movies});
+  List<MovieResponse>? movies;
+  String? error;
+  PopularMovieResponse({this.page, this.movies});
+  PopularMovieResponse.withError(String errorMessage) {
+    error = errorMessage;
+  }
   factory PopularMovieResponse.fromJson(Map<String, dynamic> json) =>
       _$PopularMovieResponseFromJson(json);
   Map<String, dynamic> toJson() => _$PopularMovieResponseToJson(this);

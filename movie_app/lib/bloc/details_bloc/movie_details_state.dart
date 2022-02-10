@@ -10,6 +10,10 @@ class MovieDetailsSuccessState extends MovieDetailsState {
   MovieDetailsSuccessState(this.movie);
 }
 
-class MovieDetailsFailedState extends MovieDetailsState {}
+class MovieDetailsFailedState extends MovieDetailsState {
+  final String? message;
+
+  MovieDetailsFailedState(this.message);
+}
 
 class MovieDetailsLoadingState extends MovieDetailsState {}

@@ -15,7 +15,7 @@ class MovieCard extends StatelessWidget {
   Widget build(BuildContext context) {
     TextTheme textTheme = Theme.of(context).textTheme;
     return InkWell(
-      onTap: () => idCallback(movie.id),
+      onTap: () => idCallback(movie.id!),
       child: Card(
         shape:
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),

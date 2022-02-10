@@ -7,11 +7,7 @@ class MovieRepository {
   MovieApi movieApi = AppInstance.movieApi;
 
   Future<MovieResponse> getMovie(int id) async {
-    MovieResponse movie = await movieApi.fetchMovieDetails(id: id).catchError(
-      (Object e) {
-        print(e.toString());
-      },
-    );
+    MovieResponse movie = await movieApi.fetchMovieDetails(id: id);
     return movie;
   }
 
@@ -26,6 +22,7 @@ class MovieRepository {
   }
 }
 
+class NetworkError extends Error {}
 // Future<List<Movie>?> fetchMovieListWithRandom() async {
 //   if (movies == null) {
 //     return null;

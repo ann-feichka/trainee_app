@@ -21,6 +21,7 @@ class MovieApiImpl extends MovieApi {
       }
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
+      MovieResponse.withError("Data not found / Connection issue");
     }
   }
 
@@ -37,6 +38,8 @@ class MovieApiImpl extends MovieApi {
       }
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
+      return PopularMovieResponse.withError(
+          "Data not found / Connection issue");
     }
   }
 }

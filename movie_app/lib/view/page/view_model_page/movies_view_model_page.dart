@@ -3,7 +3,7 @@ import 'package:movie_app/app_instance.dart';
 import 'package:movie_app/inherited_selector.dart';
 import 'package:movie_app/view/page/view_model_page/details_view_model_page.dart';
 import 'package:movie_app/view/page/view_model_page/widget/details_v_m_widget.dart';
-import 'package:movie_app/view/widget/movies_list_view_model_widget.dart';
+import 'package:movie_app/view/page/view_model_page/widget/movies_list_view_model_widget.dart';
 import 'package:movie_app/view/widget/movies_scaffold_widget.dart';
 import 'package:movie_app/view_model/view_model.dart';
 

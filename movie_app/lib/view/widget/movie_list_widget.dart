@@ -31,9 +31,9 @@ class _MoviesListWidgetState extends State<MoviesListWidget> {
     return ListView.builder(
       scrollDirection: Axis.vertical,
       controller: controller,
-      itemCount: widget.movies.movies.length,
+      itemCount: widget.movies.movies?.length,
       itemBuilder: (BuildContext context, int index) {
-        MovieResponse movie = widget.movies.movies[index];
+        MovieResponse movie = widget.movies.movies![index];
         return Container(
             color: widget.isHighlited == true &&
                     widget.selectedIndex != null &&

@@ -8,7 +8,7 @@ part of 'movie_response.dart';
 
 MovieResponse _$MovieResponseFromJson(Map<String, dynamic> json) =>
     MovieResponse(
-      id: json['id'] as int,
+      id: json['id'] as int?,
       isAdult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
       genreIds:
@@ -31,7 +31,7 @@ MovieResponse _$MovieResponseFromJson(Map<String, dynamic> json) =>
           ?.map((e) => Company.fromJson(e as Map<String, dynamic>))
           .toList(),
       runtime: json['runtime'] as int?,
-    );
+    )..error = json['error'] as String?;
 
 Map<String, dynamic> _$MovieResponseToJson(MovieResponse instance) =>
     <String, dynamic>{
@@ -53,6 +53,7 @@ Map<String, dynamic> _$MovieResponseToJson(MovieResponse instance) =>
       'genres': instance.genres,
       'production_companies': instance.productionCompanies,
       'runtime': instance.runtime,
+      'error': instance.error,
     };
 
 Company _$CompanyFromJson(Map<String, dynamic> json) => Company(

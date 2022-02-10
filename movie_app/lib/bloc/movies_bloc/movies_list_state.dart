@@ -12,4 +12,8 @@ class MoviesSuccessState extends MoviesState {
   MoviesSuccessState(this.resultList);
 }
 
-class MoviesFailedState extends MoviesState {}
+class MoviesFailedState extends MoviesState {
+  final String? message;
+
+  MoviesFailedState(this.message);
+}

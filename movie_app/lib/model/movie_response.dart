@@ -4,36 +4,37 @@ part 'movie_response.g.dart';
 
 @JsonSerializable()
 class MovieResponse {
-  final int id;
+  int? id;
   @JsonKey(name: 'adult')
-  final bool? isAdult;
+  bool? isAdult;
   @JsonKey(name: 'backdrop_path')
-  final String? backdropPath;
+  String? backdropPath;
   @JsonKey(name: 'genre_ids')
-  final List<int>? genreIds;
+  List<int>? genreIds;
   @JsonKey(name: 'original_language')
-  final String? originalLanguage;
+  String? originalLanguage;
   @JsonKey(name: 'original_title')
-  final String? originalTitle;
+  String? originalTitle;
   @JsonKey(name: 'overview')
-  final String? overView;
-  final double? popularity;
+  String? overView;
+  double? popularity;
   @JsonKey(name: 'poster_path')
-  final String? posterPath;
+  String? posterPath;
   @JsonKey(name: 'release_date')
-  final String? releaseDate;
-  final String? title;
+  String? releaseDate;
+  String? title;
   @JsonKey(name: 'video')
-  final bool? isVideo;
+  bool? isVideo;
   @JsonKey(name: 'vote_average')
-  final double? voteAverage;
+  double? voteAverage;
   @JsonKey(name: 'vote_count')
-  final int? voteCount;
-  final int? budget;
-  final List<Genre>? genres;
+  int? voteCount;
+  int? budget;
+  List<Genre>? genres;
   @JsonKey(name: 'production_companies')
-  final List<Company>? productionCompanies;
-  final int? runtime;
+  List<Company>? productionCompanies;
+  int? runtime;
+  String? error;
 
   MovieResponse({
     required this.id,
@@ -55,7 +56,9 @@ class MovieResponse {
     this.productionCompanies,
     this.runtime,
   });
-
+  MovieResponse.withError(String errorMessage) {
+    error = errorMessage;
+  }
   factory MovieResponse.fromJson(Map<String, dynamic> json) =>
       _$MovieResponseFromJson(json);
   Map<String, dynamic> toJson() => _$MovieResponseToJson(this);

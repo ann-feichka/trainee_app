@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_app/bloc/details_bloc/details_bloc.dart';
 import 'package:movie_app/inherited_selector.dart';
-import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/details_page_body_widget.dart';
 import 'package:movie_app/view/widget/no_details_widget.dart';
 
@@ -35,22 +34,30 @@ class _DetailsBlocBuilderState extends State<DetailsBlocBuilder> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<MovieDetailBloc, MovieDetailsState>(
-        builder: (context, state) {
-      if (state is MovieDetailsSuccessState) {
-        return DetailsPageBodyWidget(movie: state.movie);
-      }
-      if (state is MovieDetailsInitialState) {
-        return NoDetailsWidget();
-      }
-      if (state is MovieDetailsFailedState) {
+    return BlocListener<MovieDetailBloc, MovieDetailsState>(
+      listener: (context, state) {
+        if (state is MovieDetailsFailedState) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(state.message!)));
+        }
+      },
+      child: BlocBuilder<MovieDetailBloc, MovieDetailsState>(
+          builder: (context, state) {
+        if (state is MovieDetailsSuccessState) {
+          return DetailsPageBodyWidget(movie: state.movie);
+        }
+        if (state is MovieDetailsInitialState) {
+          return NoDetailsWidget();
+        }
+        if (state is MovieDetailsLoadingState) {
+          return Center(
+            child: CircularProgressIndicator(),
+          );
+        }
         return Center(
-          child: Text(StringConstants.error),
+          child: NoDetailsWidget(),
         );
-      }
-      return Center(
-        child: CircularProgressIndicator(),
-      );
-    });
+      }),
+    );
   }
 }

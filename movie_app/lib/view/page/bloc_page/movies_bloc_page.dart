@@ -49,9 +49,10 @@ class _MoviesBlocPageState extends State<MoviesBlocPage> {
                 child: MovieListBlocBuilder(
                   isHighlited: orientation == Orientation.landscape,
                   idCallback: (int id) {
-                    orientation == Orientation.portrait
-                        ? _onClickPortrait(id, context)
-                        : _onClickLandscape(id);
+                    setState(() {
+                      _selectId = id;
+                    });
+                    _onClickPortrait(id, context);
                   },
                 ),
               ),
@@ -70,20 +71,9 @@ class _MoviesBlocPageState extends State<MoviesBlocPage> {
       ),
     );
   }
+}
 
-  void _onClickPortrait(int id, BuildContext context) {
-    setState(() {
-      _selectId = id;
-    });
-    Navigator.of(context)
-        .pushNamed(DetailsBlocPage.detailsPageBlocRoute, arguments: id);
-  }
-
-  void _onClickLandscape(int id) {
-    setState(() {
-      if (_selectId != id) {
-        _selectId = id;
-      }
-    });
-  }
+void _onClickPortrait(int id, BuildContext context) {
+  Navigator.of(context)
+      .pushNamed(DetailsBlocPage.detailsPageBlocRoute, arguments: id);
 }

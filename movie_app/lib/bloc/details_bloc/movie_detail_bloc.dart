@@ -3,6 +3,7 @@ import 'package:movie_app/app_instance.dart';
 import 'package:movie_app/bloc/details_bloc/movie_detail_event.dart';
 import 'package:movie_app/bloc/details_bloc/movie_details_state.dart';
 import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/repository/movie_repository.dart';
 
 class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailsState> {
   final _repository = AppInstance.movieRepository;
@@ -19,13 +20,17 @@ class MovieDetailBloc extends Bloc<MovieDetailEvent, MovieDetailsState> {
 
   Future<void> _fetchMovieDetails(
       MovieDetailFetchEvent event, Emitter<MovieDetailsState> emit) async {
-    emit(MovieDetailsLoadingState());
     if (event.id != null) {
-      MovieResponse? movie = await _repository.getMovie(event.id!);
-      if (movie == null) {
-        emit(MovieDetailsFailedState());
-      } else {
+      try {
+        emit(MovieDetailsLoadingState());
+        MovieResponse? movie = await _repository.getMovie(event.id!);
         emit(MovieDetailsSuccessState(movie));
+        if (movie.error != null) {
+          emit(MovieDetailsFailedState(movie.error));
+        }
+      } on NetworkError {
+        emit(MovieDetailsFailedState(
+            'Failed to fetch data. is your device online?'));
       }
     }
   }
