@@ -7,6 +7,7 @@ import 'package:movie_app/model/movie_response.dart';
 import 'package:movie_app/model/popular_movie_response.dart';
 
 class MovieApiImpl extends MovieApi {
+  static PopularMovieResponse? localResponse;
   @override
   Future<MovieResponse?> fetchMovieDetails({required int id}) async {
     try {
@@ -34,7 +35,8 @@ class MovieApiImpl extends MovieApi {
           headers: baseHeader);
       Map<String, dynamic> body = jsonDecode(response.body.toString());
       if (response.statusCode == 200) {
-        return PopularMovieResponse.fromJson(body);
+        localResponse = PopularMovieResponse.fromJson(body);
+        return localResponse;
       }
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");

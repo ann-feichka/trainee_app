@@ -13,12 +13,12 @@ class DetailsViewModel with ChangeNotifier {
 
   Future<void> fetchMovieDetails(int? id) async {
     if (id != null) {
-      MovieResponse movie = await _repository.getMovie(id);
+      MovieResponse? movie = await _repository.getMovie(id);
       _movieController.add(movie);
     }
   }
 
   Sink get sinkDetail => _movieController;
 
-  Future<void>? closeStream() => _movieController.close();
+  Future<void> closeStream() => _movieController.close();
 }

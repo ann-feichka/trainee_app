@@ -14,6 +14,7 @@ class MoviesSuccessState extends MoviesState {
 
 class MoviesFailedState extends MoviesState {
   final String? message;
+  final PopularMovieResponse resultList;
 
-  MoviesFailedState(this.message);
+  MoviesFailedState(this.message, this.resultList);
 }

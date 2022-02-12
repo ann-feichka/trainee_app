@@ -12,7 +12,7 @@ class MoviesViewModel {
       _moviesController.stream;
 
   Future<void> fetchMovieList() async {
-    PopularMovieResponse movies = await _repository.fetchMoviesList();
+    PopularMovieResponse? movies = await _repository.fetchMoviesList();
     _moviesController.add(movies);
   }
 }

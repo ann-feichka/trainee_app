@@ -4,7 +4,6 @@ import 'package:movie_app/route_generator.dart';
 import 'package:movie_app/simple_bloc_observer.dart';
 import 'package:movie_app/view/page/home_page.dart';
 
-import 'bloc/details_bloc/details_bloc.dart';
 import 'bloc/movies_bloc/movies_bloc.dart';
 
 void main() {
@@ -20,7 +19,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<MoviesListBloc>(create: (_) => MoviesListBloc()),
-          BlocProvider<MovieDetailBloc>(create: (_) => MovieDetailBloc())
+          // BlocProvider<MovieDetailBloc>(create: (_) => MovieDetailBloc())
         ],
         child: MaterialApp(
           title: 'Movies App',

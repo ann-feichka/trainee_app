@@ -5,7 +5,7 @@ import 'package:movie_app/view/page/view_model_page/widget/details_v_m_widget.da
 class DetailsViewModelPage extends StatefulWidget {
   final int? id;
   static const String detailsPageViewModelRoute = "/details_view_model";
-  const DetailsViewModelPage({Key? key, required this.id}) : super(key: key);
+  const DetailsViewModelPage({Key? key, this.id}) : super(key: key);
 
   @override
   _DetailsViewModelPageState createState() => _DetailsViewModelPageState();
@@ -25,7 +25,7 @@ class _DetailsViewModelPageState extends State<DetailsViewModelPage> {
         ),
         body: OrientationBuilder(builder: (context, orientation) {
           if (orientation == Orientation.landscape) {
-            Navigator.of(context).pop();
+            Navigator.of(context).pop(widget.id);
           }
           return DetailsVMWidget(
             id: widget.id,

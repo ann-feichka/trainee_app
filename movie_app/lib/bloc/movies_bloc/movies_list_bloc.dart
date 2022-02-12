@@ -7,6 +7,7 @@ import 'package:movie_app/repository/movie_repository.dart';
 
 class MoviesListBloc extends Bloc<MovieListEvent, MoviesState> {
   final _repository = AppInstance.movieRepository;
+  PopularMovieResponse _resultList = PopularMovieResponse();
 
   MoviesListBloc() : super(MovieInitialState()) {
     on<MovieListFetched>(_fetchMovies);
@@ -16,14 +17,14 @@ class MoviesListBloc extends Bloc<MovieListEvent, MoviesState> {
       MovieListFetched event, Emitter<MoviesState> emit) async {
     try {
       emit(MoviesLoadingState());
-      final PopularMovieResponse? resultList =
-          await _repository.fetchMoviesList();
-      emit(MoviesSuccessState(resultList));
-      if (resultList?.error != null) {
-        emit(MoviesFailedState(resultList?.error));
+      _resultList = await _repository.fetchMoviesList();
+      emit(MoviesSuccessState(_resultList));
+      if (_resultList.error != null) {
+        emit(MoviesFailedState(_resultList.error, _resultList));
       }
     } on NetworkError {
-      emit(MoviesFailedState('Failed to fetch data. is your device online?'));
+      emit(MoviesFailedState(
+          'Failed to fetch data. is your device online?', _resultList));
     }
   }
 }

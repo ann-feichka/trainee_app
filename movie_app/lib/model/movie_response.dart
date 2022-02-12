@@ -37,7 +37,7 @@ class MovieResponse {
   String? error;
 
   MovieResponse({
-    required this.id,
+    this.id,
     this.isAdult,
     this.backdropPath,
     this.genreIds,

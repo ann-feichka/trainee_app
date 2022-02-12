@@ -1,4 +1,5 @@
 import 'package:movie_app/api/movie_api.dart';
+import 'package:movie_app/api/movie_api_impl.dart';
 import 'package:movie_app/app_instance.dart';
 import 'package:movie_app/model/movie_response.dart';
 import 'package:movie_app/model/popular_movie_response.dart';
@@ -12,13 +13,13 @@ class MovieRepository {
   }
 
   Future<PopularMovieResponse> fetchMoviesList() async {
-    PopularMovieResponse movieResponse =
-        await movieApi.fetchPopularMovie().catchError(
-      (Object e) {
-        print(e.toString());
-      },
-    );
-    return movieResponse;
+    PopularMovieResponse? movieResponse = await movieApi.fetchPopularMovie();
+    if (movieResponse!.error != null) {
+      MovieApiImpl.localResponse?.error = movieResponse.error;
+      return MovieApiImpl.localResponse!;
+    } else {
+      return movieResponse;
+    }
   }
 }
 

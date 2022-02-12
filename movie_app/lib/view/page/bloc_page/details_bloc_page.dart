@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_app/bloc/details_bloc/details_bloc.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/page/bloc_page/bloc_builder/details_bloc_builder.dart';
 
@@ -18,23 +20,31 @@ class _DetailsBlocPageState extends State<DetailsBlocPage> {
     super.initState();
   }
 
+  // @override
+  // void dispose() {
+  //   BlocProvider.of<MovieDetailBloc>(context).close();
+  //   super.dispose();
+  // }
+
   @override
   Widget build(BuildContext context) {
-    return OrientationBuilder(
-      builder: (context, orientation) {
-        if (orientation == Orientation.landscape) {
-          Navigator.of(context).pop();
-        }
-        return Scaffold(
-            appBar: AppBar(
-              title: Text(StringConstants.detailsPageTittle),
-              centerTitle: true,
-            ),
-            body: DetailsBlocBuilder(
-              isUpdate: true,
-              id: widget.id,
-            ));
-      },
+    return BlocProvider<MovieDetailBloc>(
+      create: (_) => MovieDetailBloc(),
+      child: OrientationBuilder(
+        builder: (context, orientation) {
+          if (orientation == Orientation.landscape) {
+            Navigator.of(context).pop(widget.id);
+          }
+          return Scaffold(
+              appBar: AppBar(
+                title: Text(StringConstants.detailsPageTittle),
+                centerTitle: true,
+              ),
+              body: DetailsBlocBuilder(
+                id: widget.id,
+              ));
+        },
+      ),
     );
   }
 }

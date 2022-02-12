@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/app_instance.dart';
 import 'package:movie_app/inherited_selector.dart';
 import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/details_page_body_widget.dart';
+import 'package:movie_app/view/widget/no_details_widget.dart';
 import 'package:movie_app/view_model/view_model.dart';
 
 class DetailsVMWidget extends StatefulWidget {
@@ -14,7 +15,7 @@ class DetailsVMWidget extends StatefulWidget {
 }
 
 class _DetailsVMWidgetState extends State<DetailsVMWidget> {
-  final DetailsViewModel detailViewModel = AppInstance.detailViewModel;
+  late final DetailsViewModel detailViewModel;
   int? _currentMovie;
   @override
   void didChangeDependencies() {
@@ -24,7 +25,14 @@ class _DetailsVMWidgetState extends State<DetailsVMWidget> {
   }
 
   @override
+  void dispose() {
+    detailViewModel.closeStream();
+    super.dispose();
+  }
+
+  @override
   void initState() {
+    detailViewModel = DetailsViewModel();
     super.initState();
     _fetchDetails(widget.id);
   }
@@ -38,9 +46,24 @@ class _DetailsVMWidgetState extends State<DetailsVMWidget> {
     return StreamBuilder<MovieResponse?>(
         stream: detailViewModel.movie,
         builder: (context, snapshot) {
-          return snapshot.data != null
-              ? DetailsPageBodyWidget(movie: snapshot.data!)
-              : CircularProgressIndicator();
+          if (snapshot.data?.error != null) {
+            return Center(
+              child: Text(StringConstants.error),
+            );
+          } else {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+                return NoDetailsWidget();
+              case ConnectionState.waiting:
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              case ConnectionState.active:
+                return DetailsPageBodyWidget(movie: snapshot.data!);
+              case ConnectionState.done:
+                return DetailsPageBodyWidget(movie: snapshot.data!);
+            }
+          }
         });
   }
 }

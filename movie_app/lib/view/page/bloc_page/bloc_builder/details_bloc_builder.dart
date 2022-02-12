@@ -7,9 +7,7 @@ import 'package:movie_app/view/widget/no_details_widget.dart';
 
 class DetailsBlocBuilder extends StatefulWidget {
   final int? id;
-  final bool isUpdate;
-  const DetailsBlocBuilder({Key? key, this.id, required this.isUpdate})
-      : super(key: key);
+  const DetailsBlocBuilder({Key? key, this.id}) : super(key: key);
 
   @override
   State<DetailsBlocBuilder> createState() => _DetailsBlocBuilderState();

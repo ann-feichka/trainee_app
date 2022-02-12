@@ -16,13 +16,14 @@ class MoviesViewModelPage extends StatefulWidget {
 }
 
 class _MoviesViewModelPageState extends State<MoviesViewModelPage> {
-  final DetailsViewModel detailViewModel = AppInstance.detailViewModel;
+  // final DetailsViewModel detailViewModel = AppInstance.detailViewModel;
   final MoviesViewModel listViewModel = AppInstance.listViewModel;
   int? _selectId;
 
   @override
   void initState() {
     super.initState();
+    _selectId = null;
     _fetchMovie();
   }
 
@@ -31,52 +32,57 @@ class _MoviesViewModelPageState extends State<MoviesViewModelPage> {
   }
 
   @override
+  void didChangeDependencies() {
+    _selectId = null;
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return InheritedSelector(
-      id: _selectId,
-      child: MoviesScaffoldWidget(
-          moviesWidget: OrientationBuilder(builder: (context, orientation) {
-        return Row(
-          children: [
-            Container(
-                width: orientation == Orientation.landscape
-                    ? MediaQuery.of(context).size.width / 3
-                    : MediaQuery.of(context).size.width,
-                child: MoviesListViewModelWidget(
-                  idCallback: (int id) {
-                    setState(() {
-                      _selectId = id;
-                    });
-                    orientation == Orientation.portrait
-                        ? _onClickPortrait(id, context)
-                        : _onClickLandscape(id);
-                  },
-                  isHighlited: orientation == Orientation.landscape,
-                )),
-            orientation == Orientation.landscape
-                ? Container(
-                    width: MediaQuery.of(context).size.width / 1.5,
-                    child: DetailsVMWidget(
-                      id: _selectId,
-                    ))
-                : Container()
-          ],
-        );
-      })),
+    return OrientationBuilder(
+      builder: (context, orientation) {
+        return InheritedSelector(
+            id: _selectId,
+            child: MoviesScaffoldWidget(
+                moviesWidget: Row(
+              children: [
+                Container(
+                    width: orientation == Orientation.landscape
+                        ? MediaQuery.of(context).size.width / 3
+                        : MediaQuery.of(context).size.width,
+                    child: MoviesListViewModelWidget(
+                      idCallback: (int? id) {
+                        orientation == Orientation.portrait
+                            ? _onClickPortrait(id, context)
+                            : _onClickLandscape(id);
+                      },
+                      isHighlited: orientation == Orientation.landscape,
+                    )),
+                orientation == Orientation.landscape
+                    ? Container(
+                        width: MediaQuery.of(context).size.width / 1.5,
+                        child: DetailsVMWidget(id: _selectId))
+                    : Container()
+              ],
+            )));
+      },
     );
   }
 
-  void _onClickLandscape(int id) {
-    // setState(() {
-    //   if (_selectId != id) {
-    //     _selectId = id;
-    //   }
-    // });
+  void _onClickLandscape(int? id) {
+    setState(() {
+      _selectId = id;
+    });
   }
-}
 
-void _onClickPortrait(int id, BuildContext context) {
-  Navigator.of(context)
-      .pushNamed(DetailsViewModelPage.detailsPageViewModelRoute, arguments: id);
-  // AppInstance.detailViewModel.fetchMovieDetails(id);
+  void _onClickPortrait(int? id, BuildContext context) async {
+    int _movieFromDetails = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => DetailsViewModelPage(id: id)),
+    );
+    setState(() {
+      _selectId = _movieFromDetails;
+    });
+    // AppInstance.detailViewModel.fetchMovieDetails(id);
+  }
 }
