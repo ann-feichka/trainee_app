@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/inherited_selector.dart';
-import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/details_page_body_widget.dart';
 import 'package:movie_app/view/widget/no_details_widget.dart';
@@ -43,26 +43,25 @@ class _DetailsVMWidgetState extends State<DetailsVMWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<MovieResponse?>(
+    return StreamBuilder<MovieModel?>(
         stream: detailViewModel.movie,
         builder: (context, snapshot) {
-          if (snapshot.data?.error != null) {
-            return Center(
-              child: Text(StringConstants.error),
-            );
-          } else {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                return NoDetailsWidget();
-              case ConnectionState.waiting:
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return NoDetailsWidget();
+            case ConnectionState.waiting:
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            case ConnectionState.active:
+              if (snapshot.data == null || snapshot.data?.error != null) {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Text(StringConstants.error),
                 );
-              case ConnectionState.active:
-                return DetailsPageBodyWidget(movie: snapshot.data!);
-              case ConnectionState.done:
-                return DetailsPageBodyWidget(movie: snapshot.data!);
-            }
+              }
+              return DetailsPageBodyWidget(movie: snapshot.data!);
+            case ConnectionState.done:
+              return DetailsPageBodyWidget(movie: snapshot.data!);
           }
         });
   }

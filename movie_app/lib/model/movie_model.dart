@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'movie_response.g.dart';
+part 'movie_model.g.dart';
 
 @JsonSerializable()
-class MovieResponse {
+class MovieModel {
   int? id;
   @JsonKey(name: 'adult')
   bool? isAdult;
@@ -36,7 +36,7 @@ class MovieResponse {
   int? runtime;
   String? error;
 
-  MovieResponse({
+  MovieModel({
     this.id,
     this.isAdult,
     this.backdropPath,
@@ -56,12 +56,12 @@ class MovieResponse {
     this.productionCompanies,
     this.runtime,
   });
-  MovieResponse.withError(String errorMessage) {
+  MovieModel.withError(String errorMessage) {
     error = errorMessage;
   }
-  factory MovieResponse.fromJson(Map<String, dynamic> json) =>
-      _$MovieResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$MovieResponseToJson(this);
+  factory MovieModel.fromJson(Map<String, dynamic> json) =>
+      _$MovieModelFromJson(json);
+  Map<String, dynamic> toJson() => _$MovieModelToJson(this);
 }
 
 @JsonSerializable()

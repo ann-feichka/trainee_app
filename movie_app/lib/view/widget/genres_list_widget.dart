@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
 
 import 'card/genre_card.dart';
 
 class GenresList extends StatelessWidget {
-  final MovieResponse movie;
+  final MovieModel movie;
 
   const GenresList({Key? key, required this.movie}) : super(key: key);
 

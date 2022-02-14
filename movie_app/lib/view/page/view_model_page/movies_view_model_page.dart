@@ -42,7 +42,10 @@ class _MoviesViewModelPageState extends State<MoviesViewModelPage> {
     return OrientationBuilder(
       builder: (context, orientation) {
         return InheritedSelector(
-            id: _selectId,
+            id: _selectId =
+                MediaQuery.of(context).orientation == Orientation.portrait
+                    ? null
+                    : _selectId,
             child: MoviesScaffoldWidget(
                 moviesWidget: Row(
               children: [

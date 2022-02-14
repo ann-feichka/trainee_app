@@ -1,4 +1,4 @@
-import 'package:movie_app/model/popular_movie_response.dart';
+import 'package:movie_app/model/popular_movie_model.dart';
 
 abstract class MoviesState {}
 
@@ -7,14 +7,14 @@ class MovieInitialState extends MoviesState {}
 class MoviesLoadingState extends MoviesState {}
 
 class MoviesSuccessState extends MoviesState {
-  final PopularMovieResponse? resultList;
+  final PopularMovieModel resultList;
 
   MoviesSuccessState(this.resultList);
 }
 
 class MoviesFailedState extends MoviesState {
   final String? message;
-  final PopularMovieResponse resultList;
+  final PopularMovieModel resultList;
 
   MoviesFailedState(this.message, this.resultList);
 }

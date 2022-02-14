@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/movie_api.dart';
-import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/string_constants.dart';
 
 class CompanyCard extends StatelessWidget {

@@ -1,11 +1,11 @@
-import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
 
 abstract class MovieDetailsState {}
 
 class MovieDetailsInitialState extends MovieDetailsState {}
 
 class MovieDetailsSuccessState extends MovieDetailsState {
-  final MovieResponse movie;
+  final MovieModel movie;
 
   MovieDetailsSuccessState(this.movie);
 }

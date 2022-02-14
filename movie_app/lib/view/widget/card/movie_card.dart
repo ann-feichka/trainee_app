@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/movie_api.dart';
-import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/movie_list_widget.dart';
 import 'package:movie_app/view/widget/vote_average_widget.dart';
 
 class MovieCard extends StatelessWidget {
-  final MovieResponse movie;
+  final MovieModel movie;
   final IdCallback idCallback;
   const MovieCard({Key? key, required this.movie, required this.idCallback})
       : super(key: key);

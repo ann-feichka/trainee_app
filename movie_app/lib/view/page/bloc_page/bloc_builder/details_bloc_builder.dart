@@ -52,6 +52,11 @@ class _DetailsBlocBuilderState extends State<DetailsBlocBuilder> {
             child: CircularProgressIndicator(),
           );
         }
+        if (state is MovieDetailsFailedState) {
+          return Center(
+            child: Text(state.message!),
+          );
+        }
         return Center(
           child: NoDetailsWidget(),
         );

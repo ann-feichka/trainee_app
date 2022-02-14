@@ -1,13 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/api/movie_api.dart';
-import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/companies_widget.dart';
 import 'package:movie_app/view/widget/genres_list_widget.dart';
 
 class DetailsPageBodyWidget extends StatelessWidget {
-  final MovieResponse movie;
+  final MovieModel movie;
 
   const DetailsPageBodyWidget({Key? key, required this.movie})
       : super(key: key);

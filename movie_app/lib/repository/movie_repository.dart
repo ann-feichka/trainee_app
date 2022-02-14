@@ -1,25 +1,27 @@
 import 'package:movie_app/api/movie_api.dart';
-import 'package:movie_app/api/movie_api_impl.dart';
 import 'package:movie_app/app_instance.dart';
-import 'package:movie_app/model/movie_response.dart';
-import 'package:movie_app/model/popular_movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
+import 'package:movie_app/model/popular_movie_model.dart';
 
 class MovieRepository {
   MovieApi movieApi = AppInstance.movieApi;
+  PopularMovieModel localResponse = PopularMovieModel();
 
-  Future<MovieResponse> getMovie(int id) async {
-    MovieResponse movie = await movieApi.fetchMovieDetails(id: id);
+  Future<MovieModel?> getMovie(int id) async {
+    MovieModel? movie = await movieApi.fetchMovieDetails(id: id);
     return movie;
   }
 
-  Future<PopularMovieResponse> fetchMoviesList() async {
-    PopularMovieResponse? movieResponse = await movieApi.fetchPopularMovie();
-    if (movieResponse!.error != null) {
-      MovieApiImpl.localResponse?.error = movieResponse.error;
-      return MovieApiImpl.localResponse!;
-    } else {
-      return movieResponse;
+  Future<PopularMovieModel> fetchMoviesList() async {
+    PopularMovieModel movieResponse = await movieApi.fetchPopularMovie();
+    if (movieResponse.error == null && movieResponse.movies != null) {
+      localResponse = movieResponse;
     }
+    return movieResponse;
+  }
+
+  Future<PopularMovieModel> fetchCashedMoviesList() async {
+    return localResponse;
   }
 }
 

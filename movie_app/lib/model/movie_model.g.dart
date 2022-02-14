@@ -1,13 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'movie_response.dart';
+part of 'movie_model.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-MovieResponse _$MovieResponseFromJson(Map<String, dynamic> json) =>
-    MovieResponse(
+MovieModel _$MovieModelFromJson(Map<String, dynamic> json) => MovieModel(
       id: json['id'] as int?,
       isAdult: json['adult'] as bool?,
       backdropPath: json['backdrop_path'] as String?,
@@ -33,7 +32,7 @@ MovieResponse _$MovieResponseFromJson(Map<String, dynamic> json) =>
       runtime: json['runtime'] as int?,
     )..error = json['error'] as String?;
 
-Map<String, dynamic> _$MovieResponseToJson(MovieResponse instance) =>
+Map<String, dynamic> _$MovieModelToJson(MovieModel instance) =>
     <String, dynamic>{
       'id': instance.id,
       'adult': instance.isAdult,

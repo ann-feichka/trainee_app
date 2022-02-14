@@ -12,5 +12,3 @@ class MovieDetailFetchEvent extends MovieDetailEvent {
   @override
   List<Object?> get props => [id];
 }
-
-class MovieDetailResetEvent extends MovieDetailEvent {}

@@ -1,15 +1,15 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:movie_app/api/movie_api.dart';
 import 'package:movie_app/api/movie_api_constant.dart';
-import 'package:movie_app/model/movie_response.dart';
-import 'package:movie_app/model/popular_movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
+import 'package:movie_app/model/popular_movie_model.dart';
 
 class MovieApiImpl extends MovieApi {
-  static PopularMovieResponse? localResponse;
   @override
-  Future<MovieResponse?> fetchMovieDetails({required int id}) async {
+  Future<MovieModel?> fetchMovieDetails({required int id}) async {
     try {
       final response = await http.get(
           Uri.http(baseUrl, MovieApiConstant.movieDetailsRoute + id.toString(),
@@ -18,16 +18,16 @@ class MovieApiImpl extends MovieApi {
 
       Map<String, dynamic> body = jsonDecode(response.body.toString());
       if (response.statusCode == 200) {
-        return MovieResponse.fromJson(body);
+        return MovieModel.fromJson(body);
       }
     } catch (error, stacktrace) {
       print("Exception occured: $error stackTrace: $stacktrace");
-      MovieResponse.withError("Data not found / Connection issue");
+      MovieModel.withError("Data not found / Connection issue");
     }
   }
 
   @override
-  Future<PopularMovieResponse?> fetchPopularMovie() async {
+  Future<PopularMovieModel?> fetchPopularMovie() async {
     try {
       final response = await http.get(
           Uri.http(
@@ -35,13 +35,17 @@ class MovieApiImpl extends MovieApi {
           headers: baseHeader);
       Map<String, dynamic> body = jsonDecode(response.body.toString());
       if (response.statusCode == 200) {
-        localResponse = PopularMovieResponse.fromJson(body);
-        return localResponse;
+        return PopularMovieModel.fromJson(body);
       }
     } catch (error, stacktrace) {
+      String errorMessage;
+      if (error is SocketException) {
+        errorMessage = "Failed to fetch data. is your device online?";
+      } else {
+        errorMessage = "Data not found / Connection issue";
+      }
       print("Exception occured: $error stackTrace: $stacktrace");
-      return PopularMovieResponse.withError(
-          "Data not found / Connection issue");
+      return PopularMovieModel.withError(errorMessage);
     }
   }
 }

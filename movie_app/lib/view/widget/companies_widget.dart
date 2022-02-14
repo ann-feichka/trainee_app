@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/model/movie_response.dart';
+import 'package:movie_app/model/movie_model.dart';
 import 'package:movie_app/string_constants.dart';
 import 'package:movie_app/view/widget/card/company_card.dart';
 
