@@ -39,10 +39,8 @@ class _MoviesBlocPageState extends State<MoviesBlocPage> {
             bool isPortrait = orientation == Orientation.portrait;
             return Row(
               children: <Widget>[
-                Container(
-                  width: isPortrait
-                      ? MediaQuery.of(context).size.width
-                      : MediaQuery.of(context).size.width / 3,
+                Expanded(
+                  flex: 1,
                   child: MovieListBlocBuilder(
                     isHighlited: !isPortrait,
                     idCallback: (int? id) {
@@ -54,14 +52,13 @@ class _MoviesBlocPageState extends State<MoviesBlocPage> {
                     },
                   ),
                 ),
-                isPortrait
-                    ? Container()
-                    : Container(
-                        width: MediaQuery.of(context).size.width / 1.5,
-                        child: DetailsBlocBuilder(
-                          id: _selectId,
-                        ),
-                      ),
+                if (!isPortrait)
+                  Expanded(
+                    flex: 2,
+                    child: DetailsBlocBuilder(
+                      id: _selectId,
+                    ),
+                  ),
               ],
             );
           }),

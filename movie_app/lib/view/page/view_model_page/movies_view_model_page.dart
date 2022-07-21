@@ -49,23 +49,18 @@ class _MoviesViewModelPageState extends State<MoviesViewModelPage> {
             child: MoviesScaffoldWidget(
                 moviesWidget: Row(
               children: [
-                Container(
-                    width: orientation == Orientation.landscape
-                        ? MediaQuery.of(context).size.width / 3
-                        : MediaQuery.of(context).size.width,
-                    child: MoviesListViewModelWidget(
-                      idCallback: (int? id) {
-                        orientation == Orientation.portrait
-                            ? _onClickPortrait(id, context)
-                            : _onClickLandscape(id);
-                      },
-                      isHighlited: orientation == Orientation.landscape,
-                    )),
-                orientation == Orientation.landscape
-                    ? Container(
-                        width: MediaQuery.of(context).size.width / 1.5,
-                        child: DetailsVMWidget(id: _selectId))
-                    : Container()
+                Expanded(
+                  child: MoviesListViewModelWidget(
+                    idCallback: (int? id) {
+                      orientation == Orientation.portrait
+                          ? _onClickPortrait(id, context)
+                          : _onClickLandscape(id);
+                    },
+                    isHighlited: orientation == Orientation.landscape,
+                  ),
+                ),
+                if (orientation == Orientation.landscape)
+                  Expanded(flex: 2, child: DetailsVMWidget(id: _selectId))
               ],
             )));
       },

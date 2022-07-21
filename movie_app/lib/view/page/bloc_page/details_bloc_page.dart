@@ -20,12 +20,6 @@ class _DetailsBlocPageState extends State<DetailsBlocPage> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   BlocProvider.of<MovieDetailBloc>(context).close();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return BlocProvider<MovieDetailBloc>(
@@ -33,7 +27,9 @@ class _DetailsBlocPageState extends State<DetailsBlocPage> {
       child: OrientationBuilder(
         builder: (context, orientation) {
           if (orientation == Orientation.landscape) {
-            Navigator.of(context).pop(widget.id);
+            Navigator.of(context).pop(
+              widget.id,
+            );
           }
           return Scaffold(
               appBar: AppBar(
